@@ -1,5 +1,8 @@
 setInterval(SuperDiamondProgramingCore.UpdateBody, 0)
 var SuperDiamondPrograming = [
+function interval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
+ return setInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+}
 var elements = [ function createElement(tag) {
  return document.createElement(tag);
 }
