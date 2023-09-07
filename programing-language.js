@@ -1,4 +1,13 @@
-setInterval(SuperDiamondProgramingCore.UpdateBody, 0)
+var dates = [
+ function current() {
+  var date = new Date();
+  return date;
+ }
+ function new(datestring) {
+  var date = new Date(datestring);
+  return date;
+ }
+]
 function interval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
  return setInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 }
@@ -23,10 +32,8 @@ function editElement(elem, type, value) {
 function getElementData(elem, type) {
  return eval("elem." + type);
 }
-var body = document.body
-]
-]
-var SuperDiamondProgramingCore = [ function UpdateBody() {
- elements.body = document.body
+
+function body() {
+ return document.body;
 }
 ]
