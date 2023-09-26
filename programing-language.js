@@ -59,8 +59,8 @@ const popups = {
   create: function (url, windowname) { 
     if (! window.focus)return true;
     var href;
-    if (typeof(mylink) == 'string') href=mylink;
-    else href=mylink.href; 
+    if (typeof(url) == 'string') href=url;
+    else href=url.href; 
     return window.open(href, windowname, 'width=400,height=200,scrollbars=yes');
   },
 
