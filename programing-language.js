@@ -1,10 +1,3 @@
-const vbs = {
- MsgBox: function (text, iconurl, title) {
-  var msgbox = popups.create("https://alexidians.github.io/Super-Diamond-Programing-Language/files/vbs/messagebox.html", title)
-  msgbox.eval("runmessage('" + text + "', '" + iconurl + "', '" + title + "')")
- }
-}
-
 const dates = {
  current: function () {
   var date = new Date();
@@ -70,6 +63,11 @@ const popups = [
     else href=mylink.href; 
     return window.open(href, windowname, 'width=400,height=200,scrollbars=yes');
   }
+
+ MsgBox: function (text, iconurl, title) {
+  var msgbox = popups.create("https://alexidians.github.io/Super-Diamond-Programing-Language/files/popups/MsgBox.html", title)
+  msgbox.eval("runmessage('" + text + "', '" + iconurl + "', '" + title + "')")
+ }
 ]
 var cookies = {
  setCookie: function (name,value,exdays) {
