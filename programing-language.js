@@ -68,6 +68,18 @@ const popups = {
   var msgbox = popups.create("https://alexidians.github.io/Super-Diamond-Programing-Language/files/popups/MsgBox.html", title)
   msgbox.eval("runmessage('" + text + "', '" + iconurl + "', '" + title + "')")
  },
+
+ alert: function (text) {
+  alert(text)
+ },
+
+ prompt: function (text) {
+  return prompt(text);
+ },
+
+ confirm: function (text) {
+  return confirm(text);
+ }
 }
 var cookies = {
  setCookie: function (name,value,exdays) {
