@@ -1,14 +1,13 @@
-const dates = [
- function current() {
+const dates = {
+ current: function () {
   var date = new Date();
   return date;
- }
-
- function new(datestring) {
+ },
+ new: function (datestring) {
   var date = new Date(datestring);
   return date;
  }
-]
+};
 const intervals = [
 function interval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
  return setInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
