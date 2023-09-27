@@ -32,6 +32,16 @@ editElement: function (elem, type, value) {
 
 getElementData: function (elem, type) {
  return eval("elem." + type);
+},
+
+bottomStick: function (element) {
+ element.style.position = "fixed"
+ element.style.bottom = 0
+},
+
+topStick: function (element) {
+ element.style.position = "fixed"
+ element.style.top = 0
 }
 }
 const consol = {
@@ -54,16 +64,6 @@ debug: function (message) {
 clear: function () {
  console.clear()
 },
-
-bottomStick: function (element) {
- element.style.position = "fixed"
- element.style.bottom = 0
-},
-
-topStick: function (element) {
- element.style.position = "fixed"
- element.style.top = 0
-}
 }
 const popups = {
   create: function (url, windowname) { 
