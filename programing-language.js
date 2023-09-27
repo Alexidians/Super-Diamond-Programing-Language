@@ -53,6 +53,16 @@ debug: function (message) {
 
 clear: function () {
  console.clear()
+},
+
+bottomStick: function (element) {
+ element.style.position = "fixed"
+ element.style.bottom = 0
+},
+
+topStick: function (element) {
+ element.style.position = "fixed"
+ element.style.top = 0
 }
 }
 const popups = {
@@ -131,6 +141,19 @@ const storage = {
  },
  removeItem: function (name) {
   localStorage.removeItem(name)
+ }
+}
+const ads = {
+ create: function (url, iconurl, width, height) {
+  var ad = document.createElement("div")
+  ad.class = "ad"
+  ad.addEventListener('click', function handleClick(event) {
+   open(url)
+  });
+  var adimg = document.createElement("img")
+  adimg.src = iconurl
+  adimg.width = width
+  adimg.height = height
  }
 }
 setInterval(eval, 0, "elements.body = document.body")
