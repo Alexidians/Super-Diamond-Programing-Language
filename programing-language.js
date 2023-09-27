@@ -202,6 +202,26 @@ const geoLocation = {
   });
  }
 }
+
+const propertyStorage = {
+ setProperty: function (name, value) {
+  eval("propertyStorage." + name + " = " + value)
+ }
+
+ getProperty: function (name) {
+  return eval("propertyStorage." + name);
+ }
+}
+
+const windowStorage = {
+ setItem: function (name, value) {
+  eval("windowStorage." + name + " = " + value)
+ }
+
+ getItem: function (name) {
+  return eval("windowStorage." + name);
+ }
+}
 setInterval(eval, 0, "elements.body = document.body")
 setInterval(eval, 0, "consol.memory = console.memory")
 setInterval(eval, 0, "cookies = document.cookie")
