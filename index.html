@@ -10,7 +10,12 @@
 <script>
 function run() {
  var logelem = document.createElement("p")
- logelem.innerHTML = eval(document.getElementById("codeInput").value)
+ try {
+  logelem.innerHTML = eval(document.getElementById("codeInput").value)
+ }
+ catch(err) {
+  logelem.innerHTML = err
+ }
  document.getElementById("console").appendChild(logelem)
 }
 </script>
