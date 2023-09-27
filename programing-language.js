@@ -217,7 +217,7 @@ setInterval(eval, 0, "cookies = document.cookie")
 setInterval(eval, 0, "storage.itemAmount = localStorage.length")
 setInterval(eval, 0, "sesStorage.itemAmount = sessionStorage.length")
 setInterval(function () {
- navigator.getBattery().then((battery) => {
+ navigator.getBattery().then((batteryMng) => {
   battery.amount = batteryMng.level;
   battery.charging = batteryMng.charging;
   battery.timeUntilFull = batteryMng.chargingTime
