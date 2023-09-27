@@ -156,6 +156,52 @@ const ads = {
   adimg.height = height
  }
 }
+
+const geoLocation = {
+ permissionRequest: function () {
+  navigator.geoLocation.getCurrentPosition()
+ },
+
+ permission: function () {
+  navigator.permissions.query({ name: "geolocation" }).then((result) => {
+   return result.state
+  }
+ },
+
+ latitute: function () {
+  navigator.permissions.query({ name: "geolocation" }).then((result) => {
+    if (result.state === "granted") {
+     navigator.geolocation.getCurrentPosition((position) => {
+      return position.coords.latitude;
+     });
+    } else if (result.state === "prompt") {
+     navigator.geoLocation.getCurrentPosition()
+     console.warn("User Has Permissions Prompt for geoLocation. Please try running the function again")
+     return "WARNING: User has Permissions Prompt. Please Try Again";
+    } else if (result.state === "denied") {
+     console.error("User has Denied geoLocation permissions")
+     return "ERROR: User has Denied geoLocation permissions";
+    }
+  });
+ },
+
+ longtitute: function () {
+  navigator.permissions.query({ name: "geolocation" }).then((result) => {
+    if (result.state === "granted") {
+     navigator.geolocation.getCurrentPosition((position) => {
+      return position.coords.longtitute;
+     });
+    } else if (result.state === "prompt") {
+     navigator.geoLocation.getCurrentPosition()
+     console.warn("User Has Permissions Prompt for geoLocation. Please try running the function again")
+     return "WARNING: User has Permissions Prompt. Please Try Again";
+    } else if (result.state === "denied") {
+     console.error("User has Denied geoLocation permissions")
+     return "ERROR: User has Denied geoLocation permissions";
+    }
+  });
+ }
+}
 setInterval(eval, 0, "elements.body = document.body")
 setInterval(eval, 0, "consol.memory = console.memory")
 setInterval(eval, 0, "cookies = document.cookie")
