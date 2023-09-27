@@ -164,8 +164,8 @@ const geoLocation = {
 
  permission: function () {
   navigator.permissions.query({ name: "geolocation" }).then((result) => {
-   return result.state
-  }
+   return result.state;
+  });
  },
 
  latitute: function () {
