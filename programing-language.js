@@ -115,9 +115,6 @@ getCookie: function (name) {
   return "";
 },
  deleteCookie: function (name) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  let expires = "expires=" + d.toUTCString();
   document.cookie = name + "=;expires=Thu, 01 Jan 1970"
  }
 }
@@ -203,27 +200,27 @@ const geoLocation = {
  }
 }
 
-const propertyStorage = {
- setProperty: function (name, value) {
-  eval("propertyStorage." + name + " = " + value)
- }
-
- getProperty: function (name) {
-  return eval("propertyStorage." + name);
- }
-}
-
 const windowStorage = {
  setItem: function (name, value) {
   eval("windowStorage." + name + " = " + value)
- }
+ },
 
  getItem: function (name) {
   return eval("windowStorage." + name);
  }
 }
+
+const battery = {}
 setInterval(eval, 0, "elements.body = document.body")
 setInterval(eval, 0, "consol.memory = console.memory")
 setInterval(eval, 0, "cookies = document.cookie")
 setInterval(eval, 0, "storage.itemAmount = localStorage.length")
 setInterval(eval, 0, "sesStorage.itemAmount = sessionStorage.length")
+setInterval(function () {
+ navigator.getBattery().then((battery) => {
+  battery.amount = batteryMng.level;
+  battery.charging = batteryMng.charging;
+  battery.timeUntilFull = batteryMng.chargingTime
+  battery.timeUntilEmpty = batteryMng.dischargingTime
+});
+}, 0);
