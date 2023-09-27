@@ -2,9 +2,15 @@
 <p>&lt;script src=&quot;https://alexidians.github.io/Super-Diamond-Programing-Language/programing-language.js&quot;&gt;&lt;/script&gt;</p>
 <p>The Functions apply for js</p>
 <p><input id="codeInput"></input> <button onclick="run()">Run</button></p>
+<div id="console">
+<h3>Console</h3>
+<p>Sucesfully Imported Super Diamond Programing</p>
+</div>
 <script src="programing-language.js"></script>
 <script>
 function run() {
- eval(document.getElementById("codeInput").value)
+ var logelem = document.createElement("p")
+ logelem.innerHTML = eval(document.getElementById("codeInput").value)
+ document.getElementById("console").appendChild(logelem)
 }
 </script>
