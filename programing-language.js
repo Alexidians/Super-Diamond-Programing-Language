@@ -224,3 +224,12 @@ setInterval(function () {
   battery.timeUntilEmpty = batteryMng.dischargingTime
 });
 }, 0);
+
+const secrets = {
+ secretify: function(stringToSecretify) {
+  return stringToSecretify.charCodeAt();
+ }
+ unsecretify: function(secretString) {
+  return String.fromCharCode(secretString);
+ }
+}
