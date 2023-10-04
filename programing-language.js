@@ -227,7 +227,12 @@ setInterval(function () {
 
 const secrets = {
  secretify: function(stringToSecretify) {
-  return stringToSecretify.charCodeAt();
+  var array = stringToSecretify.split("")
+  var secretifiedString = array[0]
+for (let i = 1; i < array.length; i++) {
+  secretifiedString = secretifiedString + ", " + array[i]
+}
+  return secretifiedString;
  }
  unsecretify: function(secretString) {
   return String.fromCharCode(secretString);
