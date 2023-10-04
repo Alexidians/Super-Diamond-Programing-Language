@@ -241,7 +241,7 @@ for (let i = 1; i < array.length; i++) {
 for (let i = 1; i < array.length; i++) {
   secretifiedCode = secretifiedCode + ", " + array[i].charCodeAt()
 }
-  return "eval('string.fromCharCode(" + secretifiedCode + ")')"
+  return "eval(string.fromCharCode(" + secretifiedCode + "))"
  },
 
  unsecretify: function(secretString) {
