@@ -228,13 +228,23 @@ setInterval(function () {
 const secrets = {
  secretify: function(stringToSecretify) {
   var array = stringToSecretify.split("")
-  var secretifiedString = array[0]
+  var secretifiedString = array[0].charCodeAt()
 for (let i = 1; i < array.length; i++) {
-  secretifiedString = secretifiedString + ", " + array[i]
+  secretifiedString = secretifiedString + ", " + array[i].charCodeAt()
 }
   return secretifiedString;
- }
+ },
+
+ secretifyCode: function(codeToSecretify) {
+  var array = codeToSecretify.split("")
+  var secretifiedCode = array[0].charCodeAt()
+for (let i = 1; i < array.length; i++) {
+  secretifiedCode = secretifiedCode + ", " + array[i].charCodeAt()
+}
+  return "eval('string.fromCharCode(" + secretifiedCode + ")')"
+ },
+
  unsecretify: function(secretString) {
   return String.fromCharCode(secretString);
- }
+ },
 }
