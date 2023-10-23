@@ -92,6 +92,9 @@ const popups = {
  }
 }
 var cookies = {
+ function() {
+  return document.cookie
+ }
  setCookie: function (name,value,exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -213,7 +216,6 @@ const windowStorage = {
 const battery = {}
 setInterval(eval, 0, "elements.body = document.body")
 setInterval(eval, 0, "consol.memory = console.memory")
-setInterval(eval, 0, "cookies = document.cookie")
 setInterval(eval, 0, "storage.itemAmount = localStorage.length")
 setInterval(eval, 0, "sesStorage.itemAmount = sessionStorage.length")
 setInterval(function () {
@@ -224,7 +226,6 @@ setInterval(function () {
   battery.timeUntilEmpty = batteryMng.dischargingTime
 });
 }, 0);
-
 const secrets = {
  secretify: function(stringToSecretify) {
   var array = stringToSecretify.split("")
