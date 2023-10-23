@@ -1,3 +1,14 @@
+function isKeyPressed(keyName) {
+ try {
+  return eval("keyPressed." + keyName);
+ }
+ catch(err) {
+  return false;
+ }
+}
+window.addEventListener("keyup", function(e) { eval("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
+window.addEventListener("keydown", function(e) { eval("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
+const keyPressed = {}
 const dates = {
  current: function () {
   var date = new Date();
