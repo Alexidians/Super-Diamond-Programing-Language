@@ -6,6 +6,20 @@ function isKeyPressed(keyName) {
   return false;
  }
 }
+const multiFunctions = {}
+function setMultifunction(name, functions) {
+ var functionsS = functions[0]
+ for (let i = 1; i < functions.length; i++) {
+  functionsS = functionsS + "," + functions[i] 
+ }
+ eval("multiFunctions." + name + " = " + functionsS)
+}
+function execMultifunction(name) {
+ var functions = eval("multiFunctions." + name).split(",")
+ for (let i = 0; i < functions.length; i++) {
+  eval(functions[i]) 
+ }
+}
 window.addEventListener("keyup", function(e) { eval("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
 window.addEventListener("keydown", function(e) { eval("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
 const keyPressed = {}
