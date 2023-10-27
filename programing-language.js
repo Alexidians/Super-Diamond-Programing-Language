@@ -1,3 +1,13 @@
+const SuperDiamondObjectCreator = {
+ SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
+  var interval = setInterval(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
+  var ModifiedInterval = interval + "/Super-Diamond-Interval"
+ },
+ SuperDiamondTimeout: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
+  var timeout = setTimeout(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
+  var ModifiedTimeout = timeout + "/Super-Diamond-Timeout"
+ }
+}
 function isKeyPressed(keyName) {
  try {
   return eval("keyPressed." + keyName);
@@ -35,15 +45,24 @@ const dates = {
 };
 const intervals = {
 interval: function interval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
- return setInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+ return SuperDiamondObjectCreator.SuperDiamondInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 },
-
 timeout: function (func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
- return setTimeout(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+ return SuperDiamondObjectCreator.SuperDiamondTimeout(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 },
-
-clear: function (interval) {
- return clearInterval(interval);
+clearInterval: function (interval) {
+ var intervalSplit = interval.split("/")
+ var intervalID = parseInt(intervalSplit[0])
+ if(intervalSplit[1] == "Super-Diamond-Interval") {
+  clearInterval(intervalID);
+ }
+},
+clearTimeout: function (timeout) {
+ var timeoutSplit = timeout.split("/")
+ var timeoutID = parseInt(timeoutSplit[0])
+ if(timeoutSplit[1] == "Super-Diamond-Timeout") {
+  clearInterval(timeoutID)
+ }
 }
 }
 var elements = {
