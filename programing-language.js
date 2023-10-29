@@ -1,13 +1,24 @@
 const SuperDiamondObjectCreator = {
+ toString: function() {
+  return "[object SuperDiamondObjectCreator]";
+ }
  SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   var interval = setInterval(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
-  var ModifiedInterval = {}
+  var ModifiedInterval = {
+   toString: function() {
+    return "[object SuperDiamondInterval]";
+   }
+  }
   ModifiedInterval.data = interval + "/Super-Diamond-Interval"
   ModifiedInterval.id = interval
  },
  SuperDiamondTimeout: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   var timeout = setTimeout(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
-  var ModifiedTimeout = {}
+  var ModifiedTimeout = {
+   toString: function() {
+    return "[object SuperDiamondTimeout]";
+   }
+  }
   ModifiedTimeout.data = timeout + "/Super-Diamond-Timeout"
   ModifiedTimeout.id = timeout
  }
