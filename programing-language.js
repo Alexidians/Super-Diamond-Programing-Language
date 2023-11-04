@@ -202,35 +202,6 @@ const storage = {
   localStorage.removeItem(name)
  }
 }
-const ads = {
- createElem: function (url, iconurl, width, height) {
-  var ad = document.createElement("div")
-  ad.class = "ad"
-  ad.addEventListener('click', function handleClick(event) {
-   open(url)
-  });
-  var adimg = document.createElement("img")
-  adimg.src = iconurl
-  adimg.width = width
-  adimg.height = height
- },
- setPage: function(type, src) {
-  ads.pageElem.style.display = "block"
-  switch (expr) {
-  case 'html':
-    
-    break;
-  default:
-    console.log(`Sorry, we are out of ${expr}.`);
-  }
- },
- exitPage: function() {
-  ads.pageElem.innerHTML = ""
- }
-}
-ads.pageElem = document.createElement("div")
-ads.pageElem.style.display = "none"
-document.body.appendChild(ads.pageElem)
 const geoLocation = {
  permissionRequest: function () {
   navigator.geoLocation.getCurrentPosition()
