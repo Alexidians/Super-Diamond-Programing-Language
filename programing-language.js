@@ -24,6 +24,13 @@ SuperDiamondPrograming = {
   }
  },
  Scripts: {
+  element: {
+   onclick: {
+    Func: function(element) {
+     eval("SuperDiamondPrograming.Functions." + element.rlef)
+    }
+   }
+  },
   execute: {
    Func: function(SuperDiamondFunction) {
     eval("SuperDiamondPrograming.Functions." + SuperDiamondFunction)
@@ -158,9 +165,9 @@ popups: {
  }
 },
 cookies: {
- function() {
+ toString: function() {
   return document.cookie
- }
+ },
  setCookie: function (name,value,exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
