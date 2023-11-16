@@ -294,8 +294,8 @@ for (let i = 1; i < array.length; i++) {
  }
  }
 async function SuperDiamondProgramingStartup() {
- SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
- SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
+ SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
+ SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
  let configGetResponse = await fetch(SuperDiamondPrograming.System.url + "/config.json");
  if (configGetResponse.ok) {
    SuperDiamondPrograming.System.config = await configGetResponse.json();
