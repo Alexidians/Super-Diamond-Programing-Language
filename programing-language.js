@@ -1,6 +1,6 @@
 SuperDiamondPrograming = {
  System: {
-  objects: {
+  Objects: {
  SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   var interval = setInterval(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
   var ModifiedInterval = {
