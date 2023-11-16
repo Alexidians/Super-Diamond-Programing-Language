@@ -298,7 +298,7 @@ async function SuperDiamondProgramingStartup() {
  SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
  let configGetResponse = await fetch(SuperDiamondPrograming.System.url + "/config.json");
  if (configGetResponse.ok) {
-   SuperDiamondPrograming.System.config = JSON.parse(await configGetResponse.text())
+   SuperDiamondPrograming.System.config = await configGetResponse.json()
  } else {
    console.error("SuperDiamondPrograming Startup Error: Failed to Load Super Diamond Programing Config Due To. HTTP-Error: " + configGetResponse.status);
    SuperDiamondPrograming = function() {
@@ -308,7 +308,7 @@ async function SuperDiamondProgramingStartup() {
  }
  let userGetResponse = await fetch(SuperDiamondPrograming.System.url + "/user.json");
  if (userGetResponse.ok) {
-   SuperDiamondPrograming.System.user = JSON.parse(await userGetResponse.json())
+   SuperDiamondPrograming.System.user = await userGetResponse.json()
  } else {
    console.error("SuperDiamondPrograming Startup Error: Failed to Load Super Diamond Programing User Due To. HTTP-Error: " + userGetResponse.status);
    SuperDiamondPrograming = function() {
