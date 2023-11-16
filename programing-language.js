@@ -25,8 +25,8 @@ SuperDiamondPrograming = {
  },
  Scripts: {
   execute: {
-   Func: function(func) {
-    eval("SuperDiamondPrograming.Functions." + script)
+   Func: function(SuperDiamondFunction) {
+    eval("SuperDiamondPrograming.Functions." + SuperDiamondFunction)
    }
   }
  },
@@ -42,8 +42,8 @@ isKeyPressed: function(keyName) {
 Javascript: function(code) {
  eval(code)
 },
-runString: function(function) {
- SuperDiamondPrograming.Scripts.execute.Func(code)
+runString: function(SuperDiamondFunction) {
+ SuperDiamondPrograming.Scripts.execute.Func(SuperDiamondFunction)
 },
 keyPressed: {},
 dates: {
