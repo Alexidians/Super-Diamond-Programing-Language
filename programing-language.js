@@ -293,7 +293,7 @@ for (let i = 1; i < array.length; i++) {
  }
  }
  }
-function SuperDiamondProgramingStartup() {
+async function SuperDiamondProgramingStartup() {
  SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
  SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
  let configGetResponse = await fetch(SuperDiamondPrograming.System.url + "/config.json");
