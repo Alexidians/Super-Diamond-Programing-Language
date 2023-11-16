@@ -1,6 +1,7 @@
 {
+ enabled: true,
  hideScripts: false,
  functions: {
-  Eval: true
+  eval: true
  }
 }
