@@ -1,6 +1,7 @@
 {
  "enabled": true,
  "hideTags": false,
+ "functionSplitter": "; ",
  "functions": {
   "runString": true
  }
