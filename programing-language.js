@@ -33,7 +33,7 @@ SuperDiamondPrograming = {
  Functions: {
 isKeyPressed: function(keyName) {
  try {
-  return SuperDiamondPrograming.Scripts.execute.func("keyPressed." + keyName)
+  return SuperDiamondPrograming.Scripts.execute.Func("keyPressed." + keyName)
  }
  catch(err) {
   return false;
@@ -43,9 +43,7 @@ Javascript: function(code) {
  eval(code)
 },
 runString: function(function) {
- if(SuperDiamondPrograming.System.config.functions.runString) {
-  SuperDiamondPrograming.Scripts.execute.func(code)
- }
+ SuperDiamondPrograming.Scripts.execute.Func(code)
 },
 keyPressed: {},
 dates: {
@@ -256,10 +254,10 @@ geoLocation: {
 },
 windowStorage: {
  setItem: function (name, value) {
-  return SuperDiamondPrograming.Scripts.execute.func("windowStorage." + name + " = " + value);
+  return SuperDiamondPrograming.Scripts.execute.Func("windowStorage." + name + " = " + value);
  },
  getItem: function (name) {
-  return SuperDiamondPrograming.Scripts.execute.func("windowStorage." + name);
+  return SuperDiamondPrograming.Scripts.execute.Func("windowStorage." + name);
  }
 },
 battery: {},
@@ -332,16 +330,18 @@ setInterval(function () {
   SuperDiamondPrograming.Functions.battery.timeUntilEmpty = batteryMng.dischargingTime
 });
 }, 0);
-window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.execute.func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
-window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
+window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
+window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
 console.info("SuperDiamondPrograming Has Started Up")
 if(SuperDiamondPrograming.System.config.enabled == true) {
  var SuperDiamondProgramingTags = document.getElementsByTagName("SuperDiamondPrograming")
  var SuperDiamondProgramingFileTags = document.getElementsByTagName("SuperDiamondProgramingFile")
+ var SuperDiamondProgramingTagsExsist = typeof document.getElementsByTagName("SuperDiamondPrograming")[0] !== 'undefined'
+ var SuperDiamondProgramingFileTagsExsist = typeof document.getElementsByTagName("SuperDiamondProgramingFile")[0] !== 'undefined'
  for (let i = 0; i < SuperDiamondProgramingTags.length; i++) {
   var Scripts = SuperDiamondProgramingTags.innerHTML.split(SuperDiamondPrograming.System.config.functionSplitter);
   for (let i = 0; i < Scripts.length; i++) {
-   SuperDiamondPrograming.Scripts.execute.func(Scripts[i])
+   SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
   }
  }
  for (let i = 0; i < SuperDiamondProgramingFileTags.length; i++) {
@@ -350,7 +350,7 @@ if(SuperDiamondPrograming.System.config.enabled == true) {
    if (SuperDiamondProgramingFileGetResponse.ok) {
     var Scripts = SuperDiamondProgramingFileGetResponse.text().split(SuperDiamondPrograming.System.config.functionSplitter);
     for (let i = 0; i < Scripts.length; i++) {
-     SuperDiamondPrograming.Scripts.execute.func(Scripts[i])
+     SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
     }
    } else {
     console.error('Could Not Fetch SuperDiamondPrograming File Content At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src '"</SuperDiamondProgramingFile> due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
@@ -358,6 +358,16 @@ if(SuperDiamondPrograming.System.config.enabled == true) {
   }
   else {
    console.error('File At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src '"</SuperDiamondProgramingFile> is Not Type .SuperDiamondPrograming')
+  }
+ }
+ if(SuperDiamondPrograming.System.config.hideTags) {
+  while(SuperDiamondProgramingTagsExsist) {
+   document.getElementsByTagName("SuperDiamondPrograming")[0].remove()
+   SuperDiamondProgramingTagsExsist = typeof document.getElementsByTagName("SuperDiamondPrograming")[0] !== 'undefined'
+  }
+  while(SuperDiamondProgramingFileTagsExsist) {
+   document.getElementsByTagName("SuperDiamondProgramingFile")[0].remove()
+   SuperDiamondProgramingFileTagsExsist = typeof document.getElementsByTagName("SuperDiamondProgramingFile")[0] !== 'undefined'
   }
  }
 }
