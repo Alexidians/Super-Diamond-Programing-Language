@@ -1,9 +1,10 @@
 <p><img width="100px" height="100px" id="icon"></img> <h1 id="title">MessageTitle</h1></p>
 <p id="text">Message text</p>
 <script>
-function runmessage(text, iconurl, title) {
- document.getElementById("text").innerHTML = text
- document.getElementById("icon").src = iconurl
- document.getElementById("title").innerHTML = title
-}
+    window.addEventListener("message", function (e) {
+        const message = JSON.parse(e.data)
+        document.getElement("icon").src = message.iconurl
+        document.getElement("text").src = message.text
+        document.getElement("title").src = message.title
+    })
 </script>
