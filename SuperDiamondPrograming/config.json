@@ -1,7 +1,7 @@
 {
- enabled: true,
- hideTags: false,
- functions: {
-  eval: true
+ "enabled": true,
+ "hideTags": false,
+ "functions": {
+  "runString": true
  }
 }
