@@ -359,11 +359,11 @@ if(SuperDiamondPrograming.System.config.enabled == true) {
      SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
     }
    } else {
-    console.error('Could Not Fetch SuperDiamondPrograming File Content At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src '"</SuperDiamondProgramingFile> due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+    console.error('Could Not Fetch SuperDiamondPrograming File Content At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src + '"</SuperDiamondProgramingFile> due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
    }
   }
   else {
-   console.error('File At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src '"</SuperDiamondProgramingFile> is Not Type .SuperDiamondPrograming')
+   console.error('File At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src + '"</SuperDiamondProgramingFile> is Not Type .SuperDiamondPrograming')
   }
  }
  if(SuperDiamondPrograming.System.config.hideTags) {
