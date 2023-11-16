@@ -1,7 +1,6 @@
-const SuperDiamondObjectCreator = {
- toString: function() {
-  return "[object SuperDiamondObjectCreator]";
- }
+SuperDiamondPrograming = {
+ System: {
+  objects: {
  SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   var interval = setInterval(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
   var ModifiedInterval = {
@@ -22,33 +21,34 @@ const SuperDiamondObjectCreator = {
   ModifiedTimeout.data = timeout + "/Super-Diamond-Timeout"
   ModifiedTimeout.id = timeout
  }
-}
-function isKeyPressed(keyName) {
+  }
+ },
+ Scripts: {
+  execute: {
+   func: function(function) {
+    eval("SuperDiamondPrograming.Functions." + script)
+   }
+  }
+ },
+ Functions: {
+isKeyPressed: function(keyName) {
  try {
-  return eval("keyPressed." + keyName);
+  return SuperDiamondPrograming.Scripts.execute.func("keyPressed." + keyName)
  }
  catch(err) {
   return false;
  }
-}
-const multiFunctions = {}
-function setMultifunction(name, functions) {
- var functionsS = functions[0]
- for (let i = 1; i < functions.length; i++) {
-  functionsS = functionsS + "," + functions[i] 
+},
+Javascript: function(code) {
+ eval(code)
+},
+runString: function(function) {
+ if(SuperDiamondPrograming.System.config.functions.runString) {
+  SuperDiamondPrograming.Scripts.execute.func(code)
  }
- eval("multiFunctions." + name + " = " + functionsS)
-}
-function execMultifunction(name) {
- var functions = eval("multiFunctions." + name).split(",")
- for (let i = 0; i < functions.length; i++) {
-  eval(functions[i]) 
- }
-}
-window.addEventListener("keyup", function(e) { eval("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
-window.addEventListener("keydown", function(e) { eval("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
-const keyPressed = {}
-const dates = {
+},
+keyPressed: {},
+dates: {
  current: function () {
   var date = new Date();
   return date;
@@ -57,13 +57,13 @@ const dates = {
   var date = new Date(datestring);
   return date;
  }
-};
-const intervals = {
+},
+intervals: {
 interval: function interval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
- return SuperDiamondObjectCreator.SuperDiamondInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+ return SuperDiamondPrograming.System.objects.SuperDiamondInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 },
 timeout: function (func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
- return SuperDiamondObjectCreator.SuperDiamondTimeout(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+ return SuperDiamondPrograming.System.objects.SuperDiamondTimeout(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 },
 clearInterval: function (interval) {
  var intervalSplit = interval.data.split("/")
@@ -79,8 +79,8 @@ clearTimeout: function (timeout) {
   clearInterval(timeoutID)
  }
 }
-}
-var elements = {
+},
+elements: {
 createElement: function (tag) {
  return document.createElement(tag);
 },
@@ -102,10 +102,14 @@ topStick: function (element) {
  element.style.position = "fixed"
  element.style.top = 0
 }
-}
-const consol = {
+},
+console: {
 error: function (message) {
  console.error(message)
+},
+
+table: function (data) {
+ console.error(data)
 },
 
 info: function (message) {
@@ -123,8 +127,8 @@ debug: function (message) {
 clear: function () {
  console.clear()
 },
-}
-const popups = {
+},
+popups: {
   create: function (url, windowname) { 
     if (! window.focus)return true;
     var href;
@@ -135,7 +139,12 @@ const popups = {
 
  MsgBox: function (text, iconurl, title) {
   var msgbox = popups.create("https://alexidians.github.io/Super-Diamond-Programing-Language/files/popups/MsgBox.html", title)
-  msgbox.eval("runmessage('" + text + "', '" + iconurl + "', '" + title + "')")
+  var msgJson = {
+   text: text,
+   iconurl: iconurl,
+   title: title
+  }
+  msgbox.postMessage(JSON.stringify(msgJson), "*")
  },
 
  alert: function (text) {
@@ -149,8 +158,8 @@ const popups = {
  confirm: function (text) {
   return confirm(text);
  }
-}
-var cookies = {
+},
+cookies: {
  function() {
   return document.cookie
  }
@@ -160,7 +169,6 @@ var cookies = {
   let expires = "expires=" + d.toUTCString();
   document.cookie = name + "=" + value + ";" + expires + ";path=/";
 },
-
 getCookie: function (name) {
   let namet = name + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -179,8 +187,8 @@ getCookie: function (name) {
  deleteCookie: function (name) {
   document.cookie = name + "=;expires=Thu, 01 Jan 1970"
  }
-}
-const sesStorage = {
+},
+sesStorage: {
  setItem: function (name, value) {
   sessionStorage.setItem(name, value)
  },
@@ -190,8 +198,8 @@ const sesStorage = {
  removeItem: function (name) {
   sessionStorage.removeItem(name)
  }
-}
-const storage = {
+},
+storage: {
  setItem: function (name, value) {
   localStorage.setItem(name, value)
  },
@@ -201,8 +209,8 @@ const storage = {
  removeItem: function (name) {
   localStorage.removeItem(name)
  }
-}
-const geoLocation = {
+},
+geoLocation: {
  permissionRequest: function () {
   navigator.geoLocation.getCurrentPosition()
  },
@@ -229,7 +237,6 @@ const geoLocation = {
     }
   });
  },
-
  longtitute: function () {
   navigator.permissions.query({ name: "geolocation" }).then((result) => {
     if (result.state === "granted") {
@@ -246,32 +253,17 @@ const geoLocation = {
     }
   });
  }
-}
-
-const windowStorage = {
+},
+windowStorage: {
  setItem: function (name, value) {
-  eval("windowStorage." + name + " = " + value)
+  return SuperDiamondPrograming.Scripts.execute.func("windowStorage." + name + " = " + value);
  },
-
  getItem: function (name) {
-  return eval("windowStorage." + name);
+  return SuperDiamondPrograming.Scripts.execute.func("windowStorage." + name);
  }
-}
-
-const battery = {}
-setInterval(eval, 0, "elements.body = document.body")
-setInterval(eval, 0, "consol.memory = console.memory")
-setInterval(eval, 0, "storage.itemAmount = localStorage.length")
-setInterval(eval, 0, "sesStorage.itemAmount = sessionStorage.length")
-setInterval(function () {
- navigator.getBattery().then((batteryMng) => {
-  battery.amount = batteryMng.level;
-  battery.charging = batteryMng.charging;
-  battery.timeUntilFull = batteryMng.chargingTime
-  battery.timeUntilEmpty = batteryMng.dischargingTime
-});
-}, 0);
-const secrets = {
+},
+battery: {},
+secrets: {
  secretify: function(stringToSecretify) {
   var array = stringToSecretify.split("")
   var secretifiedString = array[0].charCodeAt()
@@ -293,4 +285,82 @@ for (let i = 1; i < array.length; i++) {
  unsecretify: function(secretString) {
   return String.fromCharCode(secretString);
  },
+ }
+ }
+ }
 }
+function SuperDiamondProgramingStartup() {
+ SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
+ SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
+ let configGetResponse = await fetch(SuperDiamondPrograming.System.url + "/config.json");
+ if (configGetResponse.ok) {
+   SuperDiamondPrograming.System.config = await configGetResponse.json();
+ } else {
+   console.error("SuperDiamondPrograming Startup Error: Failed to Load Super Diamond Programing Config Due To. HTTP-Error: " + configGetResponse.status);
+   SuperDiamondPrograming = function() {
+    return "SuperDiamondPrograming Was Disabled Due To Startup Error: " + "Failed to Load Super Diamond Programing Config Due To. HTTP-Error: " + configGetResponse.status
+   }
+   return;
+ }
+ let userGetResponse = await fetch(SuperDiamondPrograming.System.url + "/user.json");
+ if (userGetResponse.ok) {
+   SuperDiamondPrograming.System.user = await userGetResponse.json();
+ } else {
+   console.error("SuperDiamondPrograming Startup Error: Failed to Load Super Diamond Programing User Due To. HTTP-Error: " + userGetResponse.status);
+   SuperDiamondPrograming = function() {
+    return "SuperDiamondPrograming Was Disabled Due To Startup Error: " + "Failed to Load Super Diamond Programing User Due To. HTTP-Error: " + userGetResponse.status
+   }
+   return;
+ }
+ if(SuperDiamondPrograming.System.config.enabled == false) {
+  SuperDiamondPrograming = function() {
+   return "SuperDiamondPrograming Is Disabled"
+  }
+  console.info("SuperDiamondPrograming Is Disabled")
+  return;
+ }
+
+setInterval(eval, 0, "SuperDiamondPrograming.Functions.elements.body = document.body")
+setInterval(eval, 0, "SuperDiamondPrograming.Functions.consol.memory = console.memory")
+setInterval(eval, 0, "SuperDiamondPrograming.Functions.storage.itemAmount = localStorage.length")
+setInterval(eval, 0, "SuperDiamondPrograming.Functions.sesStorage.itemAmount = sessionStorage.length")
+setInterval(function () {
+ navigator.getBattery().then((batteryMng) => {
+  SuperDiamondPrograming.Functions.battery.amount = batteryMng.level;
+  SuperDiamondPrograming.Functions.battery.charging = batteryMng.charging;
+  SuperDiamondPrograming.Functions.battery.timeUntilFull = batteryMng.chargingTime
+  SuperDiamondPrograming.Functions.battery.timeUntilEmpty = batteryMng.dischargingTime
+});
+}, 0);
+window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.execute.func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
+window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
+console.info("SuperDiamondPrograming Has Started Up")
+if(SuperDiamondPrograming.System.config.enabled == true) {
+ var SuperDiamondProgramingTags = document.getElementsByTagName("SuperDiamondPrograming")
+ var SuperDiamondProgramingFileTags = document.getElementsByTagName("SuperDiamondProgramingFile")
+ for (let i = 0; i < SuperDiamondProgramingTags.length; i++) {
+  var Scripts = SuperDiamondProgramingTags.innerHTML.split(SuperDiamondPrograming.System.config.functionSplitter);
+  for (let i = 0; i < Scripts.length; i++) {
+   SuperDiamondPrograming.Scripts.execute.func(Scripts[i])
+  }
+ }
+ for (let i = 0; i < SuperDiamondProgramingFileTags.length; i++) {
+  if(SuperDiamondProgramingFileTags[i].src.endsWith(".SuperDiamondPrograming")) {
+   let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondProgramingFileTags[i].src);
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+    var Scripts = SuperDiamondProgramingFileGetResponse.text().split(SuperDiamondPrograming.System.config.functionSplitter);
+    for (let i = 0; i < Scripts.length; i++) {
+     SuperDiamondPrograming.Scripts.execute.func(Scripts[i])
+    }
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming File Content At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src '"</SuperDiamondProgramingFile> due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  }
+  else {
+   console.error('File At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src '"</SuperDiamondProgramingFile> is Not Type .SuperDiamondPrograming')
+  }
+ }
+}
+SuperDiamondProgramingStartup = undefined
+}
+SuperDiamondProgramingStartup()
