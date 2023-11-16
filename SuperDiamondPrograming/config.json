@@ -1,0 +1,6 @@
+{
+ hideScripts: false,
+ functions: {
+  Eval: true
+ }
+}
