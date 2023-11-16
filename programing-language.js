@@ -293,7 +293,6 @@ for (let i = 1; i < array.length; i++) {
  }
  }
  }
-}
 function SuperDiamondProgramingStartup() {
  SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
  SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].src
