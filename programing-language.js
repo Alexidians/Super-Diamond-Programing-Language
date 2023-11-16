@@ -27,13 +27,13 @@ SuperDiamondPrograming = {
   element: {
    onclick: {
     Func: function(element) {
-     eval("SuperDiamondPrograming.Functions." + element.rlef)
+     return eval("SuperDiamondPrograming.Functions." + element.rlef);
     }
    }
   },
   execute: {
    Func: function(SuperDiamondFunction) {
-    eval("SuperDiamondPrograming.Functions." + SuperDiamondFunction)
+    return eval("SuperDiamondPrograming.Functions." + SuperDiamondFunction);
    }
   }
  },
@@ -325,7 +325,7 @@ async function SuperDiamondProgramingStartup() {
  }
 
 setInterval(eval, 0, "SuperDiamondPrograming.Functions.elements.body = document.body")
-setInterval(eval, 0, "SuperDiamondPrograming.Functions.consol.memory = console.memory")
+setInterval(eval, 0, "SuperDiamondPrograming.Functions.console.memory = console.memory")
 setInterval(eval, 0, "SuperDiamondPrograming.Functions.storage.itemAmount = localStorage.length")
 setInterval(eval, 0, "SuperDiamondPrograming.Functions.sesStorage.itemAmount = sessionStorage.length")
 setInterval(function () {
