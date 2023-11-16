@@ -25,7 +25,7 @@ SuperDiamondPrograming = {
  },
  Scripts: {
   execute: {
-   func: function(function) {
+   Func: function(function) {
     eval("SuperDiamondPrograming.Functions." + script)
    }
   }
