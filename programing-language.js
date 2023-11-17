@@ -47,7 +47,7 @@ isKeyPressed: function(keyName) {
  }
 },
 Javascript: function(code) {
- eval(code)
+ return eval(code);
 },
 btoa: function(data) {
  return btoa(data);
@@ -68,6 +68,13 @@ statements: {
     return { state: state };
    }
   }
+ },
+ for: function(startNumber, endNumber, func) {
+  for (let i = startNumber; i < endNumber; i++) {
+   SuperDiamondPrograming.Scripts.execute.Func("i = " + i)
+   SuperDiamondPrograming.Scripts.execute.Func(func)
+  }
+  SuperDiamondPrograming.Scripts.execute.Func("i = undefined")
  }
 },
 customFuncs: { 
@@ -88,7 +95,7 @@ execute: function(name) {
 }
 },
 runString: function(SuperDiamondFunction) {
- SuperDiamondPrograming.Scripts.execute.Func(SuperDiamondFunction)
+ return SuperDiamondPrograming.Scripts.execute.Func(SuperDiamondFunction);
 },
 keyPressed: {},
 dates: {
