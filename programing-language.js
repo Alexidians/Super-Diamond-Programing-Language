@@ -1,6 +1,6 @@
 SuperDiamondPrograming = {
  System: {
-  Objects: {
+  objects: {
  SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   var interval = setInterval(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + param1 + ", " + ", " + param2 + ", " + param3 + ", " + param4 + ", " + param5 + ", " + param6 + ", " + param7 + ", " + param8 + ", " + param9 + ", " + param10 + ")")
   var ModifiedInterval = {
@@ -20,8 +20,13 @@ SuperDiamondPrograming = {
   }
   ModifiedTimeout.data = timeout + "/Super-Diamond-Timeout"
   ModifiedTimeout.id = timeout
- }
+ },
+ DatabaseConnection: {
+  MySQL: function(servername, dbusername, dbpassword, dbname) {
+   return { toString: function() { return "[object Super Diamond MySQL Database Connection]" }, servername: servername, username: dbusername, password: dbpassword, name: dbname, data: ["Super-Diamond-MySQL-DB-Connection", servername, dbusername, dbpassword, dbname] };
   }
+ }
+}
  },
  Scripts: {
   element: {
@@ -44,6 +49,18 @@ isKeyPressed: function(keyName) {
  }
  catch(err) {
   return false;
+ }
+},
+Databases: {
+ MySQL: {
+  connect: function(servername, dbusername, dbpassword, dbname) {
+   return SuperDiamondPrograming.System.objects.DatabaseConnection.MySQL(servername, dbusername, dbpassword, dbname);
+  },
+  request: function(DatabaseConnection, query) {
+   if(DatabaseConnection.data[0] == "Super-Diamond-MySQL-DB-Connection") {
+    open("https://alexidiansgithub.getenjoyment.net/Super-Diamond-Programing-Language/php/databaseRequest/mysql.php?servername=" + encodeURI(DatabaseConnection.data[1]) + "&dbusername=" + encodeURI(DatabaseConnection.data[2]) + "&dbpassword=" + encodeURI(DatabaseConnection.data[3]) + "&dbname=" + encodeURI(DatabaseConnection.data[4]) + "&query=" + encodeURI(query));
+   }
+  }
  }
 },
 Javascript: function(code) {
@@ -369,6 +386,15 @@ async function SuperDiamondProgramingStartup() {
   return;
  }
 
+SuperDiamondPrograming.Functions.Databases.queryElement = document.createElement("iframe")
+SuperDiamondPrograming.Functions.Databases.queryElement.style.display = "none";
+document.body.appendChild(SuperDiamondPrograming.Functions.Databases.queryElement)
+    window.addEventListener("message", function (e) {
+        if (e.origin !== "http://alexidiansgithub.getenjoyment.net/") {
+            return
+        }
+        SuperDiamondPrograming.Functions.Databases.lastResponse = JSON.parse(e.data)
+    })
 setInterval(eval, 0, "SuperDiamondPrograming.Functions.elements.body = document.body")
 setInterval(eval, 0, "SuperDiamondPrograming.Functions.console.memory = console.memory")
 setInterval(eval, 0, "SuperDiamondPrograming.Functions.storage.itemAmount = localStorage.length")
