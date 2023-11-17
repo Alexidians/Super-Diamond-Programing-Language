@@ -2,7 +2,7 @@ SuperDiamondPrograming = {
  System: {
   Objects: {
  SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
-  var interval = setInterval(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
+  var interval = setInterval(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + param1 + ", " + ", " + param2 + ", " + param3 + ", " + param4 + ", " + param5 + ", " + param6 + ", " + param7 + ", " + param8 + ", " + param9 + ", " + param10 + ")")
   var ModifiedInterval = {
    toString: function() {
     return "[object SuperDiamondInterval]";
@@ -12,7 +12,7 @@ SuperDiamondPrograming = {
   ModifiedInterval.id = interval
  },
  SuperDiamondTimeout: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
-  var timeout = setTimeout(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10)
+  var timeout = setTimeout(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + param1 + ", " + ", " + param2 + ", " + param3 + ", " + param4 + ", " + param5 + ", " + param6 + ", " + param7 + ", " + param8 + ", " + param9 + ", " + param10 + ")")
   var ModifiedTimeout = {
    toString: function() {
     return "[object SuperDiamondTimeout]";
@@ -48,6 +48,44 @@ isKeyPressed: function(keyName) {
 },
 Javascript: function(code) {
  eval(code)
+},
+btoa: function(data) {
+ return btoa(data);
+},
+atob: function(data) {
+ return atob(data);
+},
+statements: {
+ if: function(state, ifFunc, elseFunc) {
+  if(state) {
+   return { state: state, returnValue: SuperDiamondPrograming.Scripts.execute.Func(ifFunc) };
+  }
+  else {
+   if(typeof elseFunc !== 'undefined') {
+    return { state: state, returnValue: SuperDiamondPrograming.Scripts.execute.Func(elseFunc) };
+   }
+   else {
+    return { state: state };
+   }
+  }
+ }
+},
+customFuncs: { 
+set: function(name, funcArray) {
+ SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name + " = " + funcArray)
+},
+content: function(name) {
+ return SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name);
+},
+delete: function(name) {
+ SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name + " = undefined")
+},
+execute: function(name) {
+ var funcArray = SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name)
+ for (let i = 0; i < funcArray.length; i++) {
+  SuperDiamondPrograming.Scripts.execute.Func(funcArray[i])
+ }
+}
 },
 runString: function(SuperDiamondFunction) {
  SuperDiamondPrograming.Scripts.execute.Func(SuperDiamondFunction)
@@ -114,7 +152,7 @@ error: function (message) {
 },
 
 table: function (data) {
- console.error(data)
+ console.table(data)
 },
 
 info: function (message) {
@@ -259,11 +297,11 @@ geoLocation: {
   });
  }
 },
-windowStorage: {
- setItem: function (name, value) {
+variables: {
+ set: function (name, value) {
   return SuperDiamondPrograming.Scripts.execute.Func("windowStorage." + name + " = " + value);
  },
- getItem: function (name) {
+ get: function (name) {
   return SuperDiamondPrograming.Scripts.execute.Func("windowStorage." + name);
  }
 },
@@ -345,12 +383,14 @@ if(SuperDiamondPrograming.System.config.enabled == true) {
  var SuperDiamondProgramingTagsExsist = typeof document.getElementsByTagName("SuperDiamondPrograming")[0] !== 'undefined'
  var SuperDiamondProgramingFileTagsExsist = typeof document.getElementsByTagName("SuperDiamondProgramingFile")[0] !== 'undefined'
  for (let i = 0; i < SuperDiamondProgramingTags.length; i++) {
+  SuperDiamondProgramingTags[i].style.display = "none"
   var Scripts = SuperDiamondProgramingTags.innerHTML.split(SuperDiamondPrograming.System.config.functionSplitter);
   for (let i = 0; i < Scripts.length; i++) {
    SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
   }
  }
  for (let i = 0; i < SuperDiamondProgramingFileTags.length; i++) {
+  SuperDiamondProgramingFileTags[i].style.display = "none"
   if(SuperDiamondProgramingFileTags[i].src.endsWith(".SuperDiamondPrograming")) {
    let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondProgramingFileTags[i].src);
    if (SuperDiamondProgramingFileGetResponse.ok) {
