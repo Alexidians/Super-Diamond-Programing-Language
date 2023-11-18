@@ -1,5 +1,7 @@
 SuperDiamondPrograming = {
  System: {
+  textEncoder: new TextEncoder(),
+  textDecoder: new TextDecoder(),
   objects: {
  SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   var interval = setInterval(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + param1 + ", " + ", " + param2 + ", " + param3 + ", " + param4 + ", " + param5 + ", " + param6 + ", " + param7 + ", " + param8 + ", " + param9 + ", " + param10 + ")")
@@ -54,6 +56,28 @@ isKeyPressed: function(keyName) {
  }
  catch(err) {
   return false;
+ }
+},
+TextEncoder: {
+ enocde: function(text) {
+  return SuperDiamondPrograming.System.textEncoder.encode(text);
+ },
+ stringify: function(encodedText) {
+  return encodedText.toString();
+ },
+ toBuffer: function(encodedText) {
+  return encodedText.buffer;
+ }
+},
+TextDecoder: {
+ enocde: function(text) {
+  return SuperDiamondPrograming.System.textDecoder.decode(text);
+ },
+ unStringify: function(encodedString) {
+  return SuperDiamondPrograming.System.textEncoder.encode(eval("String.fromCharCode(" + encodedString + ")"));
+ },
+ fromBuffer: function(buffer) {
+  return new Uint8Array(buffer);
  }
 },
 Databases: {
