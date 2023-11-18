@@ -98,6 +98,11 @@ Databases: {
 Javascript: function(code) {
  return eval(code);
 },
+ServiceWorker: {
+ execute: function (code) {
+  navigator.serviceWorker.controller.postMessage({ requestType: "SuperDiamondPrograming Service-Worker Execution", code: code})
+ }
+},
 btoa: function(data) {
  return btoa(data);
 },
@@ -479,6 +484,12 @@ setInterval(function () {
 }, 0);
 window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
 window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
+navigator.serviceWorker.register(SuperDiamondPrograming.System.url + "/service-worker_executor.js")
+navigator.serviceWorker.addEventListener('message', event => {
+ if (event.data.sender === "SuperDiamondPrograming Service-Worker Execution Return") {
+  SuperDiamondPrograming.Functions.ServiceWorker.lastReturn = { successful: event.data.successful, result: event.data.result }
+ }
+});
 console.info("SuperDiamondPrograming Has Started Up")
 if(SuperDiamondPrograming.System.config.enabled == true) {
  var SuperDiamondProgramingTags = document.getElementsByTagName("SuperDiamondPrograming")
