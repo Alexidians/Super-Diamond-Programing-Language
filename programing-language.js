@@ -10,6 +10,7 @@ SuperDiamondPrograming = {
   }
   ModifiedInterval.data = interval + "/Super-Diamond-Interval"
   ModifiedInterval.id = interval
+  return ModifiedInterval;
  },
  SuperDiamondTimeout: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   var timeout = setTimeout(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + param1 + ", " + ", " + param2 + ", " + param3 + ", " + param4 + ", " + param5 + ", " + param6 + ", " + param7 + ", " + param8 + ", " + param9 + ", " + param10 + ")")
@@ -20,11 +21,15 @@ SuperDiamondPrograming = {
   }
   ModifiedTimeout.data = timeout + "/Super-Diamond-Timeout"
   ModifiedTimeout.id = timeout
+  return ModifiedInterval
  },
  DatabaseConnection: {
   MySQL: function(servername, dbusername, dbpassword, dbname) {
    return { toString: function() { return "[object Super Diamond MySQL Database Connection]" }, servername: servername, username: dbusername, password: dbpassword, name: dbname, data: ["Super-Diamond-MySQL-DB-Connection", servername, dbusername, dbpassword, dbname] };
   }
+ },
+ Element: function(elem) {
+  return { toString: function() { return "[object Super Diamond Element]" }, elem: elem, data: ["Super Diamond Element", elem], setAttribute: function (name, value) { elem.setAttribute(name, value) }, getAttribute: function (name) { return elem.getAttribute(name); }, removeAttribute: function (name) { elem.removeAttribute(name) }, delete: function () { elem.remove() }}
  }
 }
  },
@@ -148,26 +153,62 @@ clearTimeout: function (timeout) {
 }
 },
 elements: {
-createElement: function (tag) {
- return document.createElement(tag);
+create: function (tag) {
+ return SuperDiamondPrograming.System.objects.element(document.createElement(tag));
 },
 
-editElement: function (elem, type, value) {
- eval("elem." + type + " = " + value)
+setAttribute: function (elem, name, value) {
+ if(elem.data[0] == "Super Diamond Element") {
+  elem.data[1].setAttribute(name, value)
+ }
 },
 
-getElementData: function (elem, type) {
- return eval("elem." + type);
+getAttribute: function (elem, name) {
+ if(elem.data[0] == "Super Diamond Element") {
+  return elem.data[1].getAttribute(name);
+ }
+},
+
+removeAttribute: function (elem, name) {
+ if(elem.data[0] == "Super Diamond Element") {
+  elem.data[1].removeAttribute(name)
+ }
+},
+
+byID: function (ID) {
+ return SuperDiamondPrograming.System.objects.element(document.getElementById(ID));
+},
+
+byTagName: function (tagName) {
+ var array = document.getElementsByTagName(tagName)
+ for (let i = 0; i < array.length; i++) {
+  array[i] = SuperDiamondPrograming.System.objects.element(array[i]);
+ }
+ return array;
+},
+
+byClassName: function (className) {
+ var array = document.getElementsByClassName(className)
+ for (let i = 0; i < array.length; i++) {
+  array[i] = SuperDiamondPrograming.System.objects.element(array[i]);
+ }
+ return array;
+},
+
+delete: function (elem, name) {
+ if(elem.data[0] == "Super Diamond Element") {
+  elem.data[1].remove()
+ }
 },
 
 bottomStick: function (element) {
- element.style.position = "fixed"
- element.style.bottom = 0
+ element.data[1].style.position = "fixed"
+ element.data[1].style.bottom = 0
 },
 
 topStick: function (element) {
- element.style.position = "fixed"
- element.style.top = 0
+ element.data[1].style.position = "fixed"
+ element.data[1].style.top = 0
 }
 },
 console: {
