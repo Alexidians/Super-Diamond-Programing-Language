@@ -423,6 +423,8 @@ for (let i = 1; i < array.length; i++) {
  }
  }
  }
+
+window.addEventListener("SuperDiamondPrograming Storage API Startup", function() { SuperDiamondPrograming.Functions.Storage = JSON.parse(document.getElementById("SuperDiamondProgramingStorageAPI")) }
 async function SuperDiamondProgramingStartup() {
  SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
  SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
@@ -478,7 +480,6 @@ setInterval(function () {
 window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
 window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
 console.info("SuperDiamondPrograming Has Started Up")
-setTimeout(function() { if(typeof TEMPSuperDiamondProgramingStorageAPI !== 'undefined') { SuperDiamondPrograming.Functions.Storage = TEMPSuperDiamondProgramingStorageAPI; TEMPSuperDiamondProgramingStorageAPI = undefined }}, 3000)
 if(SuperDiamondPrograming.System.config.enabled == true) {
  var SuperDiamondProgramingTags = document.getElementsByTagName("SuperDiamondPrograming")
  var SuperDiamondProgramingFileTags = document.getElementsByTagName("SuperDiamondProgramingFile")
