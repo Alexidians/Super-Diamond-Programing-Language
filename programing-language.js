@@ -80,6 +80,9 @@ TextDecoder: {
   return new Uint8Array(buffer);
  }
 },
+Storage: {
+ installed: false
+},
 Databases: {
  MySQL: {
   connect: function(servername, dbusername, dbpassword, dbname) {
