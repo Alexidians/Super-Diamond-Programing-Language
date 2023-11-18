@@ -484,7 +484,17 @@ setInterval(function () {
 }, 0);
 window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
 window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
-navigator.serviceWorker.register(SuperDiamondPrograming.System.url + "/service-worker_executor.js")
+var ServiceWorkerExecutorActive = false
+navigator.serviceWorker.getRegistrations().then(registrations => {
+for (let i = 0; i < cars.length; i++) {
+ if(registrations[1].active.scriptURL == SuperDiamondPrograming.System.url + "/service-worker_executor.js") {
+  ServiceWorkerExecutorActive = true
+ }
+}
+});
+if(!ServiceWorkerExecutorActive) {
+ navigator.serviceWorker.register(SuperDiamondPrograming.System.url + "/service-worker_executor.js")
+}
 navigator.serviceWorker.addEventListener('message', event => {
  if (event.data.sender === "SuperDiamondPrograming Service-Worker Execution Return") {
   SuperDiamondPrograming.Functions.ServiceWorker.lastReturn = { successful: event.data.successful, result: event.data.result }
