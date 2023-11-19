@@ -80,6 +80,16 @@ TextDecoder: {
   return new Uint8Array(buffer);
  }
 },
+arrays: {
+ parse: function(array) {
+  if(array.startsWith("[") && array.endsWith("]")) {
+   return eval(array);
+  }
+ },
+ stringify: function(array) {
+  return "[" + array.toString + "]";
+ }
+},
 Storage: {
  installed: false
 },
