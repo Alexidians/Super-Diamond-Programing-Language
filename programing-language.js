@@ -1,10 +1,20 @@
 SuperDiamondPrograming = {
+ parameterifyVariable: function(varName) { return eval("SuperDiamondPrograming.Functions." + varName) },
  System: {
   textEncoder: new TextEncoder(),
   textDecoder: new TextDecoder(),
   objects: {
  SuperDiamondInterval: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
-  var interval = setInterval(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + param1 + ", " + ", " + param2 + ", " + param3 + ", " + param4 + ", " + param5 + ", " + param6 + ", " + param7 + ", " + param8 + ", " + param9 + ", " + param10 + ")")
+  var params = args[0]
+  for (let i = 1; i < args.length; i++) {
+   if(typeof params[i] == 'string') {
+    params = params + ", '" + args[i] + "'"
+   }
+   else {
+    params = params + ", " + args[i]
+   }
+  }
+  var interval = setInterval(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + params + ")")
   var ModifiedInterval = {
    toString: function() {
     return "[object SuperDiamondInterval]";
@@ -14,8 +24,17 @@ SuperDiamondPrograming = {
   ModifiedInterval.id = interval
   return ModifiedInterval;
  },
- SuperDiamondTimeout: function(func, time, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
-  var timeout = setTimeout(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + param1 + ", " + ", " + param2 + ", " + param3 + ", " + param4 + ", " + param5 + ", " + param6 + ", " + param7 + ", " + param8 + ", " + param9 + ", " + param10 + ")")
+ SuperDiamondTimeout: function(func, time, args) {
+  var params = args[0]
+  for (let i = 1; i < args.length; i++) {
+   if(typeof params[i] == 'string') {
+    params = params + ", '" + args[i] + "'"
+   }
+   else {
+    params = params + ", " + args[i]
+   }
+  }
+  var timeout = setTimeout(SuperDiamondPrograming.Scripts.execute.Func, time, func + "(" + params + ")")
   var ModifiedTimeout = {
    toString: function() {
     return "[object SuperDiamondTimeout]";
@@ -23,7 +42,7 @@ SuperDiamondPrograming = {
   }
   ModifiedTimeout.data = timeout + "/Super-Diamond-Timeout"
   ModifiedTimeout.id = timeout
-  return ModifiedInterval
+  return ModifiedTimeout;
  },
  DatabaseConnection: {
   MySQL: function(servername, dbusername, dbpassword, dbname) {
@@ -50,6 +69,9 @@ SuperDiamondPrograming = {
   }
  },
  Functions: {
+  SuperDiamondPrograming: {
+   parameterifyVariable: function(varName) { return eval("SuperDiamondPrograming.Functions." + varName) }
+  },
 isKeyPressed: function(keyName) {
  try {
   return SuperDiamondPrograming.Scripts.execute.Func("keyPressed." + keyName)
@@ -59,7 +81,11 @@ isKeyPressed: function(keyName) {
  }
 },
 TextEncoder: {
- enocde: function(text) {
+ enocde: function() {
+  var text = arguments[0]
+  for (let i = 1; i < arguments.length; i++) {
+   text = text + arguments[i]
+  }
   return SuperDiamondPrograming.System.textEncoder.encode(text);
  },
  stringify: function(encodedText) {
@@ -70,7 +96,7 @@ TextEncoder: {
  }
 },
 TextDecoder: {
- enocde: function(text) {
+ decode: function(text) {
   return SuperDiamondPrograming.System.textDecoder.decode(text);
  },
  unStringify: function(encodedString) {
@@ -105,18 +131,34 @@ Databases: {
   }
  }
 },
-Javascript: function(code) {
+Javascript: function() {
+ var code = arguments[0]
+ for (let i = 1; i < arguments.length; i++) {
+  code = code + "; " + arguments[i]
+ }
  return eval(code);
 },
 ServiceWorker: {
- execute: function (code) {
+ execute: function () {
+  var code = arguments[0]
+  for (let i = 1; i < arguments.length; i++) {
+   code = code + "; " + arguments[i]
+  }
   navigator.serviceWorker.controller.postMessage({ requestType: "SuperDiamondPrograming Service-Worker Execution", code: code})
  }
 },
 btoa: function(data) {
+ var data = arguments[0]
+ for (let i = 1; i < arguments.length; i++) {
+  data = data + "; " + arguments[i]
+ }
  return btoa(data);
 },
 atob: function(data) {
+ var data = arguments[0]
+ for (let i = 1; i < arguments.length; i++) {
+  data = data + "; " + arguments[i]
+ }
  return atob(data);
 },
 statements: {
@@ -148,18 +190,26 @@ set: function(name, funcArray) {
 content: function(name) {
  return SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name);
 },
-delete: function(name) {
- SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name + " = undefined")
+delete: function() {
+ for (let i = 0; i < arguments.length; i++) {
+  SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + arguments[1] + " = undefined")
+ }
 },
-execute: function(name) {
- var funcArray = SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name)
- for (let i = 0; i < funcArray.length; i++) {
-  SuperDiamondPrograming.Scripts.execute.Func(funcArray[i])
+execute: function() {
+ for (let i = 0; i < arguments.length; i++) {
+  var funcArray = SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + arguments[i])
+  for (let i = 0; i < funcArray.length; i++) {
+   SuperDiamondPrograming.Scripts.execute.Func(funcArray[i])
+  }
  }
 }
 },
-runString: function(SuperDiamondFunction) {
- return SuperDiamondPrograming.Scripts.execute.Func(SuperDiamondFunction);
+runString: function() {
+ var code = "SuperDiamondPrograming.Scripts.execute.Func('" + arguments[0] + "')"
+ for (let i = 0; i < arguments.length; i++) {
+  code = code + "; SuperDiamondPrograming.Scripts.execute.Func('" + arguments[0] + "')"
+ }
+ return eval(code);
 },
 keyPressed: {},
 dates: {
@@ -173,11 +223,11 @@ dates: {
  }
 },
 intervals: {
-interval: function interval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
- return SuperDiamondPrograming.System.objects.SuperDiamondInterval(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+interval: function interval(func, time, args) {
+ return SuperDiamondPrograming.System.objects.SuperDiamondInterval(func, time, args);
 },
-timeout: function (func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
- return SuperDiamondPrograming.System.objects.SuperDiamondTimeout(func, time, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+timeout: function (func, time, args) {
+ return SuperDiamondPrograming.System.objects.SuperDiamondTimeout(func, time, args);
 },
 clearInterval: function (interval) {
  var intervalSplit = interval.data.split("/")
