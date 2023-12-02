@@ -491,8 +491,13 @@ for (let i = 1; i < array.length; i++) {
 
 window.addEventListener("SuperDiamondPrograming Storage API Startup", function() { SuperDiamondPrograming.Functions.Storage = JSON.parse(document.getElementById("SuperDiamondProgramingStorageAPI")) })
 async function SuperDiamondProgramingStartup() {
- SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
- SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
+ SuperDiamondPrograming.System.path = document.getElementsByTagName("superdiamondprogramingpath")[0].innerHTML
+ SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("superdiamondprogramingpath")[0].innerHTML
+ navigator.serviceWorker.register(SuperDiamondPrograming.System.url + "/offline-access.js")
+ SuperDiamondPrograming.System.offlineAccessElem = document.createElement("iframe")
+ SuperDiamondPrograming.System.offlineAccessElem.style.display = "none"
+ SuperDiamondPrograming.System.offlineAccessElem.src = "https://alexidians.github.io/Super-Diamond-Programing-Language/offline-access.html"
+ document.body.appendChild(SuperDiamondPrograming.System.offlineAccessElem)
  let configGetResponse = await fetch(SuperDiamondPrograming.System.url + "/config.json");
  if (configGetResponse.ok) {
    SuperDiamondPrograming.System.config = await configGetResponse.json()
