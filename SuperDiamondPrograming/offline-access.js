@@ -1,9 +1,9 @@
 const CACHE_NAME = 'SuperDiamondPrograming-offline';
 const CACHE_DATA = [
-  '/config.json',
-  '/user.json',
-  '/service-worker-executor.js',
-  '/offline-access.js'
+  'config.json',
+  'user.json',
+  'service-worker-executor.js',
+  'offline-access.js'
 ];
 
 self.addEventListener('install', (event) => {
