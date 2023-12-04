@@ -552,8 +552,8 @@ window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.ex
 window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
 var ServiceWorkerExecutorActive = false
 navigator.serviceWorker.getRegistrations().then(registrations => {
-for (let i = 0; i < cars.length; i++) {
- if(registrations[1].active.scriptURL == SuperDiamondPrograming.System.url + "/service-worker_executor.js") {
+for (let i = 0; i < registrations.length; i++) {
+ if(registrations[i].active.scriptURL == SuperDiamondPrograming.System.url + "/service-worker_executor.js") {
   ServiceWorkerExecutorActive = true
  }
 }
