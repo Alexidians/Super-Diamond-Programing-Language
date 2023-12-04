@@ -463,7 +463,7 @@ variables: {
  }
 },
 battery: {},
-fetch: function(resource, options) { (async () => { var returnVal = await fetch(resource, options); })() },
+fetch: function(resource, options) { (async () => { var returnVal = await fetch(resource, options); })() return returnVal; },
 secrets: {
  secretify: function(stringToSecretify) {
   var array = stringToSecretify.split("")
