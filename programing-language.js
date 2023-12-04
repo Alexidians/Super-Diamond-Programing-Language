@@ -553,8 +553,13 @@ window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.
 var ServiceWorkerExecutorActive = false
 navigator.serviceWorker.getRegistrations().then(registrations => {
 for (let i = 0; i < registrations.length; i++) {
- if(registrations[i].active.scriptURL == SuperDiamondPrograming.System.url + "/service-worker_executor.js") {
-  ServiceWorkerExecutorActive = true
+ try {
+  if(registrations[i].active.scriptURL == SuperDiamondPrograming.System.url + "/service-worker_executor.js") {
+   ServiceWorkerExecutorActive = true
+  }
+ }
+ catch(err) {
+  console.info("Failed To Check For Service Worker Executor: " + err)
  }
 }
 });
