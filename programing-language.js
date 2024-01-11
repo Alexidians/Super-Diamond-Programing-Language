@@ -550,8 +550,8 @@ setInterval(function () {
   SuperDiamondPrograming.Functions.battery.timeUntilEmpty = batteryMng.dischargingTime
 });
 }, 0);
-window.addEventListener("keyup", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false")});
-window.addEventListener("keydown", function(e) { SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true")});
+window.addEventListener("keyup", function(e) { try {SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = false");} catch(err){}});
+window.addEventListener("keydown", function(e) { try {SuperDiamondPrograming.Scripts.execute.Func("pressedKeys." + e.code.split("Key")[e.code.split("Key").length] + " = true");} catch(err){}});
 var ServiceWorkerExecutorActive = false
 navigator.serviceWorker.getRegistrations().then(registrations => {
 for (let i = 0; i < registrations.length; i++) {
