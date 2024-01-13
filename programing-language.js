@@ -359,6 +359,22 @@ popups: {
   return confirm(text);
  }
 },
+import: function (module) {
+   let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/modules/" + module + ".SuperDiamondPrograming");
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+    try {
+     var Scripts = JSON.parse(SuperDiamondProgramingFileGetResponse.text())
+     for (let i = 0; i < Scripts.length; i++) {
+      SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+     }
+    } catch(err) {
+     console.error('Failed To Load SuperDiamondPrograming Module ' + module + ' Due To Error: ' + err)
+    }
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming Module ' + module + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  }
+},
 cookies: {
  toString: function() {
   return document.cookie
@@ -581,9 +597,13 @@ if(SuperDiamondPrograming.System.config.enabled == true) {
  var SuperDiamondProgramingFileTagsExsist = typeof document.getElementsByTagName("SuperDiamondProgramingFile")[0] !== 'undefined'
  for (let i = 0; i < SuperDiamondProgramingTags.length; i++) {
   SuperDiamondProgramingTags[i].style.display = "none"
-  var Scripts = SuperDiamondProgramingTags.innerHTML.split(SuperDiamondPrograming.System.config.functionSplitter);
-  for (let i = 0; i < Scripts.length; i++) {
-   SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+  try {
+   var Scripts = JSON.parse(SuperDiamondProgramingTags.innerHTML)
+   for (let i = 0; i < Scripts.length; i++) {
+    SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+   }
+  } catch(err) {
+   console.error('Failed To Load Script Due To Error: ' + err)
   }
  }
  for (let i = 0; i < SuperDiamondProgramingFileTags.length; i++) {
@@ -591,9 +611,13 @@ if(SuperDiamondPrograming.System.config.enabled == true) {
   if(SuperDiamondProgramingFileTags[i].src.endsWith(".SuperDiamondPrograming")) {
    let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondProgramingFileTags[i].src);
    if (SuperDiamondProgramingFileGetResponse.ok) {
-    var Scripts = SuperDiamondProgramingFileGetResponse.text().split(SuperDiamondPrograming.System.config.functionSplitter);
-    for (let i = 0; i < Scripts.length; i++) {
-     SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+    try {
+     var Scripts = JSON.parse(SuperDiamondProgramingFileGetResponse.text())
+     for (let i = 0; i < Scripts.length; i++) {
+      SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+     }
+    } catch(err) {
+     console.error('Failed To Load File <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src + '"</SuperDiamondProgramingFile> Due To Error: ' + err)
     }
    } else {
     console.error('Could Not Fetch SuperDiamondPrograming File Content At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src + '"</SuperDiamondProgramingFile> due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
