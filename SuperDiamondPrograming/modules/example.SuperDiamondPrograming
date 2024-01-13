@@ -1,0 +1,1 @@
+["variables.set('ExampleLoaded', true)", "popups.alert('Example Was Imported')"]
