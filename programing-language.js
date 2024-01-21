@@ -156,9 +156,11 @@ Encoder: {
    var SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/encodings/" + Encoding + ".SuperDiamondProgramingEncoding");
    if (SuperDiamondProgramingFileGetResponse.ok) {
     try {
-      SuperDiamondPrograming.System.objects.Encoding(SuperDiamondProgramingFileGetResponse.text())
+      var EncodingObj = SuperDiamondPrograming.System.objects.Encoding(SuperDiamondProgramingFileGetResponse.text());
+      return EncodingObj;
     } catch(err) {
      console.error('Failed To Load SuperDiamondPrograming Encoding ' + Encoding + ' Due To Error: ' + err)
+     return null;
     }
    } else {
     console.error('Could Not Fetch SuperDiamondPrograming Encoding ' + Encoding + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
@@ -427,8 +429,10 @@ import: async function (module) {
      for (let i = 0; i < Scripts.length; i++) {
       SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
      }
+     return true;
     } catch(err) {
      console.error('Failed To Load SuperDiamondPrograming Module ' + module + ' Due To Error: ' + err)
+     return null;
     }
    } else {
     console.error('Could Not Fetch SuperDiamondPrograming Module ' + module + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
