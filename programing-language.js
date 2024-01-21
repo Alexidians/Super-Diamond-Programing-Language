@@ -51,6 +51,15 @@ SuperDiamondPrograming = {
  },
  Element: function(elem) {
   return { toString: function() { return "[object Super Diamond Element]" }, elem: elem, data: ["Super Diamond Element", elem], setAttribute: function (name, value) { elem.setAttribute(name, value) }, getAttribute: function (name) { return elem.getAttribute(name); }, removeAttribute: function (name) { elem.removeAttribute(name) }, delete: function () { elem.remove() }}
+ },
+ Encoding: function(encodingString) {
+  if(encodingString.split("").length == 12) {
+   return { toString: function() { return "[object Super Diamond Encoding]" }, data: encodingString.split("")}
+  }
+  else {
+   var Err = new Error("Super Diamond Programing Construct Error");
+   Err.message = "Failed To Construct Encoding. The Character Length is not correct. should be 12 characters"
+  }
  }
 }
  },
@@ -104,6 +113,57 @@ TextDecoder: {
  },
  fromBuffer: function(buffer) {
   return new Uint8Array(buffer);
+ }
+},
+Encoder: {
+ encode: function(text, encoding) {
+  var encodedText = SuperDiamondPrograming.system.textEncoder.encode("abc").toString();
+  encodedText = encodedText.replace("0", encoding[0])
+  encodedText = encodedText.replace("1", encoding[1])
+  encodedText = encodedText.replace("2", encoding[2])
+  encodedText = encodedText.replace("3", encoding[3])
+  encodedText = encodedText.replace("4", encoding[4])
+  encodedText = encodedText.replace("5", encoding[5])
+  encodedText = encodedText.replace("6", encoding[6])
+  encodedText = encodedText.replace("7", encoding[7])
+  encodedText = encodedText.replace("8", encoding[8])
+  encodedText = encodedText.replace("9", encoding[9])
+  encodedText = encodedText.replace(",", encoding[10])
+  encodedText = encodedText.replace(" ", encoding[11])
+  return encodedText;
+ },
+ decode: function(text, encoding) {
+  var encodedText = text
+  encodedText = encodedText.replace(encoding[0], "0")
+  encodedText = encodedText.replace(encoding[1], "1")
+  encodedText = encodedText.replace(encoding[2], "2")
+  encodedText = encodedText.replace(encoding[3], "3")
+  encodedText = encodedText.replace(encoding[4], "4")
+  encodedText = encodedText.replace(encoding[5], "5")
+  encodedText = encodedText.replace(encoding[6], "6")
+  encodedText = encodedText.replace(encoding[7], "7")
+  encodedText = encodedText.replace(encoding[8], "8")
+  encodedText = encodedText.replace(encoding[9], "9")
+  encodedText = encodedText.replace(encoding[10], ",")
+  encodedText = encodedText.replace(encoding[11], " ")
+  encodedText = eval("String.fromCharCode(" + encodedText + ")");
+  return encodedText;
+ },
+ Encoding: function(EncodingString) {
+  return SuperDiamondPrograming.System.Objects.Encoding(EncodingString)
+ },
+ getEncoding: async function(Encoding) {
+   var SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/encodings/" + Encoding + ".SuperDiamondProgramingEncoding");
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+    try {
+      SuperDiamondPrograming.System.objects.Encoding(SuperDiamondProgramingFileGetResponse.text())
+    } catch(err) {
+     console.error('Failed To Load SuperDiamondPrograming Encoding ' + Encoding + ' Due To Error: ' + err)
+    }
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming Encoding ' + Encoding + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  }
  }
 },
 arrays: {
@@ -359,7 +419,7 @@ popups: {
   return confirm(text);
  }
 },
-import: function (module) {
+import: async function (module) {
    let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/modules/" + module + ".SuperDiamondPrograming");
    if (SuperDiamondProgramingFileGetResponse.ok) {
     try {
@@ -373,8 +433,7 @@ import: function (module) {
    } else {
     console.error('Could Not Fetch SuperDiamondPrograming Module ' + module + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
    }
-  }
-},
+  },
 cookies: {
  toString: function() {
   return document.cookie
