@@ -1,5 +1,12 @@
 SuperDiamondPrograming = {
  parameterifyVariable: function(varName) { return eval("SuperDiamondPrograming.Functions." + varName) },
+ session: {
+  data: {
+   variables: {},
+   constants: {},
+   functions: {}
+  }
+ },
  System: {
   textEncoder: new TextEncoder(),
   textDecoder: new TextDecoder(),
@@ -247,19 +254,17 @@ statements: {
 },
 customFuncs: { 
 set: function(name, funcArray) {
- SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name + " = " + funcArray)
+ SuperDiamondPrograming.session.data.functions[name] + funcArray
 },
 content: function(name) {
- return SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + name);
+ return SuperDiamondPrograming.session.data.functions[name];
 },
 delete: function() {
- for (let i = 0; i < arguments.length; i++) {
-  SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + arguments[1] + " = undefined")
- }
+ return delete SuperDiamondPrograming.session.data.functions[name];
 },
 execute: function() {
  for (let i = 0; i < arguments.length; i++) {
-  var funcArray = SuperDiamondPrograming.Scripts.execute.Func("customFuncs." + arguments[i])
+  var funcArray = SuperDiamondPrograming.session.data.functions[arguments[i]]
   for (let i = 0; i < funcArray.length; i++) {
    SuperDiamondPrograming.Scripts.execute.Func(funcArray[i])
   }
@@ -535,10 +540,26 @@ geoLocation: {
 },
 variables: {
  set: function (name, value) {
-  return SuperDiamondPrograming.Scripts.execute.Func("windowStorage." + name + " = " + value);
+  SuperDiamondPrograming.session.data.variables[name] = value
  },
  get: function (name) {
-  return SuperDiamondPrograming.Scripts.execute.Func("windowStorage." + name);
+  return SuperDiamondPrograming.session.data.variables[name];
+ },
+ delete: function (name) {
+  return delete SuperDiamondPrograming.session.data.variables[name];
+ }
+},
+constants: {
+ create: function (name, value) {
+  if(SuperDiamondPrograming.session.data.constants[name] == undefined) {
+   SuperDiamondPrograming.session.data.constants[name] = value
+  }
+  else {
+   throw new Error("Constant " + name + " already Exsists")
+  }
+ },
+ get: function (name) {
+  return SuperDiamondPrograming.session.data.constants[name];
  }
 },
 battery: {},
