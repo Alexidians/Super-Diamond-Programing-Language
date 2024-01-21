@@ -538,6 +538,9 @@ geoLocation: {
   });
  }
 },
+await: async function(func) {
+ return await SuperDiamondPrograming.Scripts.execute.Func(func)
+},
 variables: {
  set: function (name, value) {
   SuperDiamondPrograming.session.data.variables[name] = value
