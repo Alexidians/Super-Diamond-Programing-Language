@@ -630,10 +630,6 @@ async function SuperDiamondProgramingStartup() {
   console.info("SuperDiamondPrograming Is Disabled")
   return;
  }
-
-SuperDiamondPrograming.Functions.Databases.queryElement = document.createElement("iframe")
-SuperDiamondPrograming.Functions.Databases.queryElement.style.display = "none";
-document.body.appendChild(SuperDiamondPrograming.Functions.Databases.queryElement)
     window.addEventListener("message", function (e) {
         if (e.origin !== "http://alexidiansgithub.getenjoyment.net/") {
             return
