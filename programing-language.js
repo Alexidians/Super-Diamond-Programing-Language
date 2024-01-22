@@ -245,6 +245,14 @@ Databases: {
   }
  }
 },
+Session: {
+ save: function(name) {
+  localforage.setItem("SuperDiamondProgramingStorage_Sessions_" + name, SuperDiamondPrograming.session)
+ },
+ load: function(name) {
+  location.replace("?SuperDiamondPrograming_LoadSession=" + encodeURIComponent(name))
+ }
+},
 Javascript: function() {
  var code = arguments[0]
  for (let i = 1; i < arguments.length; i++) {
@@ -728,6 +736,11 @@ navigator.serviceWorker.addEventListener('message', event => {
   SuperDiamondPrograming.Functions.ServiceWorker.lastReturn = { successful: event.data.successful, result: event.data.result }
  }
 });
+var params = new URL(document.location).searchParams;
+var SessionNameToLoad = params.get("SuperDiamondPrograming_LoadSession");
+if(SessionNameToLoad !== null) {
+ localforage.getItem("SuperDiamondProgramingStorage_Sessions_" + SessionNameToLoad)
+}
 console.info("SuperDiamondPrograming Has Started Up")
 if(SuperDiamondPrograming.System.config.enabled == true) {
  var SuperDiamondProgramingTags = document.getElementsByTagName("SuperDiamondPrograming")
