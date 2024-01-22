@@ -173,8 +173,7 @@ Encoder: {
     console.error('Could Not Fetch SuperDiamondPrograming Encoding ' + Encoding + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
    }
   }
- }
-},
+ },
 arrays: {
  parse: function(array) {
   if(array.startsWith("[") && array.endsWith("]")) {
@@ -593,6 +592,7 @@ for (let i = 1; i < array.length; i++) {
  },
  }
  }
+}
 
 window.addEventListener("SuperDiamondPrograming Storage API Startup", function() { SuperDiamondPrograming.Functions.Storage = JSON.parse(document.getElementById("SuperDiamondProgramingStorageAPI")) })
 async function SuperDiamondProgramingStartup() {
@@ -630,6 +630,9 @@ async function SuperDiamondProgramingStartup() {
   console.info("SuperDiamondPrograming Is Disabled")
   return;
  }
+ SuperDiamondPrograming.Functions.Databases.queryElement = document.createElement("iframe")
+ SuperDiamondPrograming.Functions.Databases.queryElement.style.display = "none";
+ document.body.appendChild(SuperDiamondPrograming.Functions.Databases.queryElement)
     window.addEventListener("message", function (e) {
         if (e.origin !== "http://alexidiansgithub.getenjoyment.net/") {
             return
