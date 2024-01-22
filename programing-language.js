@@ -247,10 +247,20 @@ Databases: {
 },
 Session: {
  save: function(name) {
-  localforage.setItem("SuperDiamondProgramingStorage_Sessions_" + name, SuperDiamondPrograming.session)
+  if(typeof localforage !== typeof undefined) {
+   localforage.setItem("SuperDiamondProgramingStorage_Sessions_" + name, SuperDiamondPrograming.session)
+  } else {
+   var Err = new Error("SuperDiamondPrograming Storage Error")
+   Err.message = "Could Not Save Session As The Lib localforage.min.js (localforage) was not loaded"
+  }
  },
  load: function(name) {
-  location.replace("?SuperDiamondPrograming_LoadSession=" + encodeURIComponent(name))
+  if(typeof localforage !== typeof undefined) {
+   location.replace("?SuperDiamondPrograming_LoadSession=" + encodeURIComponent(name))
+  } else {
+   var Err = new Error("SuperDiamondPrograming Storage Error")
+   Err.message = "Could Not Load Session As The Lib localforage.min.js (localforage) was not loaded"
+  }
  }
 },
 Javascript: function() {
@@ -739,7 +749,12 @@ navigator.serviceWorker.addEventListener('message', event => {
 var params = new URL(document.location).searchParams;
 var SessionNameToLoad = params.get("SuperDiamondPrograming_LoadSession");
 if(SessionNameToLoad !== null) {
- localforage.getItem("SuperDiamondProgramingStorage_Sessions_" + SessionNameToLoad)
+ if(typeof localforage !== typeof undefined) {
+  localforage.getItem("SuperDiamondProgramingStorage_Sessions_" + SessionNameToLoad)
+ } else {
+  var Err = new Error("SuperDiamondPrograming Storage Error")
+  Err.message = "Could Not Load Session As The Lib localforage.min.js (localforage) was not loaded"
+ }
 }
 console.info("SuperDiamondPrograming Has Started Up")
 if(SuperDiamondPrograming.System.config.enabled == true) {
