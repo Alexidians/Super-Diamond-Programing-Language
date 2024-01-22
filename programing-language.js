@@ -425,6 +425,14 @@ popups: {
   return confirm(text);
  }
 },
+JSON: {
+ stringify: function(json) {
+  return JSON.stringify(json);
+ },
+ parse: function(json) {
+  return JSON.parse(json);
+ }
+},
 import: async function (module) {
    let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/modules/" + module + ".SuperDiamondPrograming");
    if (SuperDiamondProgramingFileGetResponse.ok) {
