@@ -124,7 +124,7 @@ TextDecoder: {
 },
 Encoder: {
  encode: function(text, encoding) {
-  var encodedText = SuperDiamondPrograming.system.textEncoder.encode("abc").toString();
+  var encodedText = SuperDiamondPrograming.System.textEncoder.encode("abc").toString();
   encodedText = encodedText.replaceAll("0", encoding[0])
   encodedText = encodedText.replaceAll("1", encoding[1])
   encodedText = encodedText.replaceAll("2", encoding[2])
