@@ -565,8 +565,8 @@ constants: {
  }
 },
 battery: {},
-fetch: async function(resource, options) {
- return await fetch(resource, options);
+fetch: function(resource, options) {
+ return fetch(resource, options);
 },
 secrets: {
  secretify: function(stringToSecretify) {
