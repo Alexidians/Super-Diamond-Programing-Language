@@ -125,34 +125,34 @@ TextDecoder: {
 Encoder: {
  encode: function(text, encoding) {
   var encodedText = SuperDiamondPrograming.system.textEncoder.encode("abc").toString();
-  encodedText = encodedText.replace("0", encoding[0])
-  encodedText = encodedText.replace("1", encoding[1])
-  encodedText = encodedText.replace("2", encoding[2])
-  encodedText = encodedText.replace("3", encoding[3])
-  encodedText = encodedText.replace("4", encoding[4])
-  encodedText = encodedText.replace("5", encoding[5])
-  encodedText = encodedText.replace("6", encoding[6])
-  encodedText = encodedText.replace("7", encoding[7])
-  encodedText = encodedText.replace("8", encoding[8])
-  encodedText = encodedText.replace("9", encoding[9])
-  encodedText = encodedText.replace(",", encoding[10])
-  encodedText = encodedText.replace(" ", encoding[11])
+  encodedText = encodedText.replaceAll("0", encoding[0])
+  encodedText = encodedText.replaceAll("1", encoding[1])
+  encodedText = encodedText.replaceAll("2", encoding[2])
+  encodedText = encodedText.replaceAll("3", encoding[3])
+  encodedText = encodedText.replaceAll("4", encoding[4])
+  encodedText = encodedText.replaceAll("5", encoding[5])
+  encodedText = encodedText.replaceAll("6", encoding[6])
+  encodedText = encodedText.replaceAll("7", encoding[7])
+  encodedText = encodedText.replaceAll("8", encoding[8])
+  encodedText = encodedText.replaceAll("9", encoding[9])
+  encodedText = encodedText.replaceAll(",", encoding[10])
+  encodedText = encodedText.replaceAll(" ", encoding[11])
   return encodedText;
  },
  decode: function(text, encoding) {
   var encodedText = text
-  encodedText = encodedText.replace(encoding[0], "0")
-  encodedText = encodedText.replace(encoding[1], "1")
-  encodedText = encodedText.replace(encoding[2], "2")
-  encodedText = encodedText.replace(encoding[3], "3")
-  encodedText = encodedText.replace(encoding[4], "4")
-  encodedText = encodedText.replace(encoding[5], "5")
-  encodedText = encodedText.replace(encoding[6], "6")
-  encodedText = encodedText.replace(encoding[7], "7")
-  encodedText = encodedText.replace(encoding[8], "8")
-  encodedText = encodedText.replace(encoding[9], "9")
-  encodedText = encodedText.replace(encoding[10], ",")
-  encodedText = encodedText.replace(encoding[11], " ")
+  encodedText = encodedText.replaceAll(encoding[0], "0")
+  encodedText = encodedText.replaceAll(encoding[1], "1")
+  encodedText = encodedText.replaceAll(encoding[2], "2")
+  encodedText = encodedText.replaceAll(encoding[3], "3")
+  encodedText = encodedText.replaceAll(encoding[4], "4")
+  encodedText = encodedText.replaceAll(encoding[5], "5")
+  encodedText = encodedText.replaceAll(encoding[6], "6")
+  encodedText = encodedText.replaceAll(encoding[7], "7")
+  encodedText = encodedText.replaceAll(encoding[8], "8")
+  encodedText = encodedText.replaceAll(encoding[9], "9")
+  encodedText = encodedText.replaceAll(encoding[10], ",")
+  encodedText = encodedText.replaceAll(encoding[11], " ")
   encodedText = eval("String.fromCharCode(" + encodedText + ")");
   return encodedText;
  },
