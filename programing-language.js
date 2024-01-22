@@ -251,7 +251,7 @@ Session: {
    localforage.setItem("SuperDiamondProgramingStorage_Sessions_" + name, SuperDiamondPrograming.session)
   } else {
    var Err = new Error("SuperDiamondPrograming Storage Error")
-   Err.message = "Could Not Save Session As The Lib localforage.min.js (localforage) was not loaded"
+   Err.message = 'Could Not Save Session As The Lib localforage.min.js (localforage) was not loaded. HTML Tag: <script src="https://alexidians.github.io/Super-Diamond-Programing-Language/libs/localforage.min.js"></script>'
   }
  },
  load: function(name) {
@@ -259,7 +259,7 @@ Session: {
    location.replace("?SuperDiamondPrograming_LoadSession=" + encodeURIComponent(name))
   } else {
    var Err = new Error("SuperDiamondPrograming Storage Error")
-   Err.message = "Could Not Load Session As The Lib localforage.min.js (localforage) was not loaded"
+   Err.message = 'Could Not Load Session As The Lib localforage.min.js (localforage) was not loaded. HTML Tag: <script src="https://alexidians.github.io/Super-Diamond-Programing-Language/libs/localforage.min.js"></script>'
   }
  }
 },
@@ -753,7 +753,7 @@ if(SessionNameToLoad !== null) {
   localforage.getItem("SuperDiamondProgramingStorage_Sessions_" + SessionNameToLoad)
  } else {
   var Err = new Error("SuperDiamondPrograming Storage Error")
-  Err.message = "Could Not Load Session As The Lib localforage.min.js (localforage) was not loaded"
+  Err.message = 'Could Not Load Session As The Lib localforage.min.js (localforage) was not loaded. HTML Tag: <script src="https://alexidians.github.io/Super-Diamond-Programing-Language/libs/localforage.min.js"></script>'
  }
 }
 console.info("SuperDiamondPrograming Has Started Up")
