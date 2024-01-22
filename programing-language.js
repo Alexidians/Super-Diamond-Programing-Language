@@ -66,6 +66,17 @@ SuperDiamondPrograming = {
   else {
    var Err = new Error("Super Diamond Programing Construct Error");
    Err.message = "Failed To Construct Encoding. The Character Length is not correct. should be 12 characters"
+   throw Err;
+  }
+ },
+ Hashing: function(hashingString) {
+  if(hashingString.split("").length == 12) {
+   return { toString: function() { return "[object Super Diamond Hashing]" }, data: hashingString.split("")}
+  }
+  else {
+   var Err = new Error("Super Diamond Programing Construct Error");
+   Err.message = "Failed To Construct Hashing. The Character Length is not correct. should be 12 characters"
+   throw Err;
   }
  }
 }
@@ -171,6 +182,41 @@ Encoder: {
     }
    } else {
     console.error('Could Not Fetch SuperDiamondPrograming Encoding ' + Encoding + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  }
+ },
+ hasher: {
+ hash: function(text, hashing) {
+  var encodedText = SuperDiamondPrograming.System.textEncoder.encode(text).toString();
+  encodedText = encodedText.replaceAll("0", hashing.data[0])
+  encodedText = encodedText.replaceAll("1", hashing.data[1])
+  encodedText = encodedText.replaceAll("2", hashing.data[2])
+  encodedText = encodedText.replaceAll("3", hashing.data[3])
+  encodedText = encodedText.replaceAll("4", hashing.data[4])
+  encodedText = encodedText.replaceAll("5", hashing.data[5])
+  encodedText = encodedText.replaceAll("6", hashing.data[6])
+  encodedText = encodedText.replaceAll("7", hashing.data[7])
+  encodedText = encodedText.replaceAll("8", hashing.data[8])
+  encodedText = encodedText.replaceAll("9", hashing.data[9])
+  encodedText = encodedText.replaceAll(",", hashing.data[10])
+  encodedText = encodedText.replaceAll(" ", hashing.data[11])
+  return encodedText;
+ },
+ Hashing: function(HashingString) {
+  return SuperDiamondPrograming.System.objects.Hashing(HashingString)
+ },
+ getHashing: async function(Hashing) {
+   var SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/hashings/" + Hashing + ".SuperDiamondProgramingHashing");
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+    try {
+      var EncodingObj = SuperDiamondPrograming.System.objects.Hashing(SuperDiamondProgramingFileGetResponse.text());
+      return EncodingObj;
+    } catch(err) {
+     console.error('Failed To Load SuperDiamondPrograming Hashing ' + Hashing + ' Due To Error: ' + err)
+     return null;
+    }
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming Hashing ' + Hashing + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
    }
   }
  },
