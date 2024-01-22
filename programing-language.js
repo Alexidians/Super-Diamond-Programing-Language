@@ -157,7 +157,7 @@ Encoder: {
   return encodedText;
  },
  Encoding: function(EncodingString) {
-  return SuperDiamondPrograming.System.Objects.Encoding(EncodingString)
+  return SuperDiamondPrograming.System.objects.Encoding(EncodingString)
  },
  getEncoding: async function(Encoding) {
    var SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/encodings/" + Encoding + ".SuperDiamondProgramingEncoding");
