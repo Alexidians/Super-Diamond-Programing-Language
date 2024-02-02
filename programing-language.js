@@ -756,6 +756,7 @@ for (let i = 1; i < array.length; i++) {
  }
  }
 }
+}
 
 async function SuperDiamondProgramingStartup() {
  SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
