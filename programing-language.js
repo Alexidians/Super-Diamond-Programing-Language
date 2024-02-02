@@ -4,7 +4,8 @@ SuperDiamondPrograming = {
   data: {
    variables: {},
    constants: {},
-   functions: {}
+   functions: {},
+   resources: {}
   }
  },
  System: {
@@ -246,6 +247,96 @@ Databases: {
  }
 },
 Session: {
+ resources: {
+  load: {
+   module: async function(name, module) {
+   let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/modules/" + module + ".SuperDiamondPrograming");
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+    SuperDiamondPrograming.session.resources[name] = SuperDiamondProgramingFileGetResponse.text()
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming Module ' + module + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  },
+  encoding: async function(name, Encoding) {
+   var SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/encodings/" + Encoding + ".SuperDiamondProgramingEncoding");
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+     SuperDiamondPrograming.session.resources[name] = SuperDiamondProgramingFileGetResponse.text();
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming Encoding ' + Encoding + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  },
+  hashing: async function(name, Hashing) {
+   var SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondPrograming.System.url + "/hashings/" + Hashing + ".SuperDiamondProgramingHashing");
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+     SuperDiamondPrograming.session.resources[name] = SuperDiamondProgramingFileGetResponse.text()
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming Hashing ' + Hashing + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  },
+  script: async function(name, url) {
+   var SuperDiamondProgramingFileGetResponse = await fetch(url);
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+     SuperDiamondPrograming.session.resources[name] = SuperDiamondProgramingFileGetResponse.text()
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming Script ' + url + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  },
+  file: async function(name, url) {
+   var SuperDiamondProgramingFileGetResponse = await fetch(url);
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+     SuperDiamondPrograming.session.resources[name] = SuperDiamondProgramingFileGetResponse.text()
+   } else {
+    console.error('Could Not Fetch File ' + url + ' due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  }
+ },
+  },
+  execute: {
+   module: function(name) {
+    try {
+     var Scripts = JSON.parse(SuperDiamondPrograming.session.resources[name])
+     for (let i = 0; i < Scripts.length; i++) {
+      SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+     }
+     return true;
+    } catch(err) {
+     console.error('Failed To Execute SuperDiamondPrograming Module Resource ' + name + ' Due To Error: ' + err)
+     return null;
+    }
+  },
+  encoding: function(name) {
+    try {
+      var EncodingObj = SuperDiamondPrograming.System.objects.Encoding(SuperDiamondPrograming.session.resources[name]);
+      return EncodingObj;
+    } catch(err) {
+     console.error('Failed To LExecute SuperDiamondPrograming Encoding Resource ' + name + ' Due To Error: ' + err)
+     return null;
+    }
+  },
+  hashing: async function(name) {
+    try {
+      var EncodingObj = SuperDiamondPrograming.System.objects.Hashing(SuperDiamondProgramingFileGetResponse.text());
+      return EncodingObj;
+    } catch(err) {
+     console.error('Failed To Execute SuperDiamondPrograming Hashing Resource ' + name + ' Due To Error: ' + err)
+     return null;
+    }
+ },
+ script: function(name) {
+    try {
+     var Scripts = JSON.parse(SuperDiamondPrograming.session.resources[name])
+     for (let i = 0; i < Scripts.length; i++) {
+      SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+     }
+     return true;
+    } catch(err) {
+     console.error('Failed To Execute SuperDiamondPrograming Script Resource ' + name + ' Due To Error: ' + err)
+     return null;
+    }
+  },
+ file: function(name) {
+   return SuperDiamondPrograming.session.resources[name];
+  },
  save: function(name) {
   if(typeof localforage !== typeof undefined) {
    localforage.setItem("SuperDiamondProgramingStorage_Sessions_" + name, SuperDiamondPrograming.session)
@@ -666,7 +757,6 @@ for (let i = 1; i < array.length; i++) {
  }
 }
 
-window.addEventListener("SuperDiamondPrograming Storage API Startup", function() { SuperDiamondPrograming.Functions.Storage = JSON.parse(document.getElementById("SuperDiamondProgramingStorageAPI")) })
 async function SuperDiamondProgramingStartup() {
  SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
  SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
