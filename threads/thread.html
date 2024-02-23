@@ -1,0 +1,61 @@
+<html>
+<head></head>
+<body>
+<SuperDiamondProgramingPath style="display: none;">Super-Diamond-Programing-Language/SuperDiamondPrograming</SuperDiamondProgramingPath>
+<script src="https://alexidians.github.io/Super-Diamond-Programing-Language/programing-language.js"></script>
+<script>
+function replaceFunctions(json, func) {
+    const newJson = {};
+    for (const key in json) {
+        if (typeof json[key] === 'function') {
+            newJson[key] = func;
+        } else if (typeof json[key] === 'object') {
+            newJson[key] = replaceFunctions(json[key]);
+        } else {
+            newJson[key] = json[key];
+        }
+    }
+    return newJson;
+}
+
+
+    SuperDiamondPrograming.Functions.Session = replaceFunctions(SuperDiamondPrograming.Functions.Session, function() { throw new Error("Session Is Not Available In Thread"); });
+    SuperDiamondPrograming.Functions.Thread = {
+     terminate: function() {
+      SuperDiamondPrograming = replaceFunctions(SuperDiamondPrograming, function() { throw new Error("Thread is Terminated"); });
+      throw new Error("Session Has Been Terminated")
+     }
+    }
+    SuperDiamondPrograming.Functions.storage = {
+     setItem: function(name, value) {
+      var returnVal = null
+      (async () => {
+       parent.postMessage(JSON.stringify({
+        request: "Execute",
+        code: {
+         func: "localStorage.setItem",
+         params: name + "," + value
+        }
+       }));
+       window.addEventListener('message', function(event) {
+        var data = JSON.parse(event.data)
+        if(data.request = "Execute-Return") {
+         returnVal = data.value
+        }
+       })
+      })();
+      return returnVal;
+     }
+    }
+    window.addEventListener('message', function(event) {
+        var data = event.data;
+        data = JSON.stringify(data)
+        if(data.request == "Execute") {
+         for (let i = 0; i < data.script.length; i++) {
+          SuperDiamondPrograming.scripts.execute(data.script[i]);
+         }
+        }
+    });
+</script>
+</body>
+</html>
