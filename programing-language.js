@@ -758,6 +758,71 @@ for (let i = 1; i < array.length; i++) {
 }
 }
 
+class SuperDiamondProgrammingHTMLElem extends HTMLElement {
+  constructor() {
+    super();
+  }
+  connectedCallback() {
+    setTimeout(() => {
+      let dataArray;
+      try {
+        dataArray = JSON.parse(this.innerHTML);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        return;
+      }
+      dataArray.forEach(key => {
+        SuperDiamondPrograming.scripts.execute(key);
+      });
+    }, 0);
+  }
+}
+class SuperDiamondProgrammingFileHTMLElem extends HTMLElement {
+  constructor() {
+    super();
+  }
+  connectedCallback() {
+    setTimeout(() => {
+  if(this.src.endsWith(".SuperDiamondPrograming")) {
+   let SuperDiamondProgramingFileGetResponse = await fetch(this.src);
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+    try {
+     var Scripts = JSON.parse(SuperDiamondProgramingFileGetResponse.text())
+     for (let i = 0; i < Scripts.length; i++) {
+      SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+     }
+    } catch(err) {
+     console.error('Failed To Load File <SuperDiamondProgramingFile src="' + this.src + '"</SuperDiamondProgramingFile> Due To Error: ' + err)
+    }
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming File Content At <SuperDiamondProgramingFile src="' + this.src + '"</SuperDiamondProgramingFile> due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  }
+  else {
+   console.error('File At <SuperDiamondProgramingFile src="' + this.src + '"</SuperDiamondProgramingFile> is Not Type .SuperDiamondPrograming')
+  }
+    }, 0);
+  }
+}
+
+  if(SuperDiamondProgramingFileTags[i].src.endsWith(".SuperDiamondPrograming")) {
+   let SuperDiamondProgramingFileGetResponse = await fetch(SuperDiamondProgramingFileTags[i].src);
+   if (SuperDiamondProgramingFileGetResponse.ok) {
+    try {
+     var Scripts = JSON.parse(SuperDiamondProgramingFileGetResponse.text())
+     for (let i = 0; i < Scripts.length; i++) {
+      SuperDiamondPrograming.Scripts.execute.Func(Scripts[i])
+     }
+    } catch(err) {
+     console.error('Failed To Load File <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src + '"</SuperDiamondProgramingFile> Due To Error: ' + err)
+    }
+   } else {
+    console.error('Could Not Fetch SuperDiamondPrograming File Content At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src + '"</SuperDiamondProgramingFile> due to HTTP-Error: '+ SuperDiamondProgramingFileGetResponse.status)
+   }
+  }
+  else {
+   console.error('File At <SuperDiamondProgramingFile src="' + SuperDiamondProgramingFileTags[i].src + '"</SuperDiamondProgramingFile> is Not Type .SuperDiamondPrograming')
+  }
 async function SuperDiamondProgramingStartup() {
  SuperDiamondPrograming.System.path = document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
  SuperDiamondPrograming.System.url = location.protocol + "//" + location.hostname + "/" + document.getElementsByTagName("SuperDiamondProgramingPath")[0].innerHTML
@@ -849,6 +914,8 @@ if(SessionNameToLoad !== null) {
 }
 console.info("SuperDiamondPrograming Has Started Up")
 if(SuperDiamondPrograming.System.config.enabled == true) {
+ customElements.define('superdiamondprograming-', SuperDiamondProgrammingHTMLElem);
+ customElements.define('superdiamondprogramingfile-', SuperDiamondProgrammingFileHTMLElem);
  var SuperDiamondProgramingTags = document.getElementsByTagName("SuperDiamondPrograming")
  var SuperDiamondProgramingFileTags = document.getElementsByTagName("SuperDiamondProgramingFile")
  var SuperDiamondProgramingTagsExsist = typeof document.getElementsByTagName("SuperDiamondPrograming")[0] !== 'undefined'
